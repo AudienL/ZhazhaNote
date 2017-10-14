@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.diaozhatian.zhazhanote.activity.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You are a 大傻比"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="32sp"/>
+
+    <Button
+        android:onClick="onFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="反馈"/>
+
+    <Button
+        android:onClick="onApiTestClick"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:text="接口测试"/>
+</LinearLayout>
