@@ -1,14 +1,9 @@
 package com.diaozhatian.zhazhanote.http;
 
-import com.audienl.superlibrary.utils.encrypt.Base64Utils;
-import com.audienl.superlibrary.utils.encrypt.RSAUtils;
 import com.diaozhatian.zhazhanote.Constants;
+import com.diaozhatian.zhazhanote.annotation.Gender;
 
 import org.xutils.http.RequestParams;
-
-import java.security.NoSuchAlgorithmException;
-import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
 
 import io.reactivex.Observable;
 
@@ -19,22 +14,16 @@ import io.reactivex.Observable;
  */
 public class Api {
     /** 注册 */
-    public static Observable<HttpResult> postRegister(String mobile, String password) {
+    public static Observable<HttpResult> postRegister(String mobile, String password, @Gender String gender, String smsCode) {
         final RequestParams params = new RequestParams(Constants.URL_AUTH_REGISTER);
         params.addBodyParameter("mobile", mobile);
-        PublicKey key = new params.addBodyParameter("password", password);
-        params.addBodyParameter("sex", sex);
+        params.addBodyParameter("sex", gender);
         params.addBodyParameter("smsCode", smsCode);
-        params.addBodyParameter("clientType", clientType);
+        params.addBodyParameter("clientType", Constants.API_CLIENT_TYPE);
         return Observable.create(e -> {
             // 加密密码
-            password = Base64Utils.encode(password.getBytes());
-            try {
-                PublicKey publicKey = RSAUtils.getPublicKey(Constants.RSA_MODULUS, Constants.RSA_PUBLIC_EXPONENT);
-                password = String.valueOf(RSAUtils.encryptData(password.getBytes(), publicKey));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            String passwordEncrypt = ApiEncryptUtils.encrypt(password);
+            params.addBodyParameter("password", passwordEncrypt);
             new Http<>(HttpResult.class, e, "注册").get(params);
         });
     }

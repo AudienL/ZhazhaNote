@@ -6,7 +6,8 @@ package com.diaozhatian.zhazhanote.http;
  * Created by audienl@qq.com on 2017/10/13.
  */
 public class HttpResult {
-    public boolean ok;// true of false
+    public String status;
     public String message;// 错误描述
     public Object data;
+    public Object dataList;
 }

@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
+import com.diaozhatian.zhazhanote.annotation.Gender;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.http.Api;
 import com.pgyersdk.activity.FeedbackActivity;
@@ -28,11 +29,12 @@ public class MainActivity extends BaseActivity {
 
     /** 接口测试 */
     public void onApiTestClick(View view) {
-        Api.getCode("12345678999").subscribe(result -> {
+//        Api.getCode("17098905192").subscribe(result -> {
+//        }, throwable -> {
+//        });
+        Api.postRegister("17098905192", "pppppp", Gender.MALE, "690917").subscribe(httpResult -> {
 
-        }, throwable -> {
-
-        });
+        }, throwable -> {});
     }
 
     /** 反馈 */
