@@ -14,15 +14,15 @@ import io.reactivex.ObservableEmitter;
  * <p>
  * Created by audienl@qq.com on 2017/10/11.
  */
-public class Http<T> implements Callback.CommonCallback<String> {
-    private static final String TAG = "Http";
+public class HttpHelper<T> implements Callback.CommonCallback<String> {
+    private static final String TAG = "HttpHelper";
 
     private Class<T> mClass;
     private int mTimeOut = 60000;
     private ObservableEmitter<T> mEmitter;
     private String mDesc;// 接口描述
 
-    public Http(Class<T> clz, ObservableEmitter<T> emitter, String desc) {
+    public HttpHelper(Class<T> clz, ObservableEmitter<T> emitter, String desc) {
         this.mClass = clz;
         mEmitter = emitter;
         mDesc = desc;

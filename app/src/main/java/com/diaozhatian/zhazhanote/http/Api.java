@@ -24,7 +24,7 @@ public class Api {
             // 加密密码
             String passwordEncrypt = ApiEncryptUtils.encrypt(password);
             params.addBodyParameter("password", passwordEncrypt);
-            new Http<>(HttpResult.class, e, "注册").get(params);
+            new HttpHelper<>(HttpResult.class, e, "注册").get(params);
         });
     }
 
@@ -32,6 +32,6 @@ public class Api {
     public static Observable<HttpResult> getCode(String mobile) {
         final RequestParams params = new RequestParams(Constants.URL_SMS_CODE);
         params.addQueryStringParameter("mobile", mobile);
-        return Observable.create(e -> new Http<>(HttpResult.class, e, "获取验证码").get(params));
+        return Observable.create(e -> new HttpHelper<>(HttpResult.class, e, "获取验证码").get(params));
     }
 }
