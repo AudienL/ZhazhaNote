@@ -13,9 +13,12 @@ import org.xutils.x;
  * Created by audienl@qq.com on 2017/10/13.
  */
 public class App extends SuperApplication {
+    public static App instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         LogUtils.init(BuildConfig.DEBUG, "Zha");
 
         PgyCrashManager.register(this);

@@ -27,6 +27,7 @@ import javax.crypto.Cipher;
  * @date 2014年8月22日 下午1:44:23
  */
 public class RSAUtils {
+//    private static String RSA = "RSA/ECB/PKCS1Padding";
     private static String RSA = "RSA";
 
     /**

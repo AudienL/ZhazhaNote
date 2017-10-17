@@ -6,14 +6,13 @@ import android.view.View;
 
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
-import com.diaozhatian.zhazhanote.annotation.Gender;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
-import com.diaozhatian.zhazhanote.http.Api;
 import com.pgyersdk.activity.FeedbackActivity;
 import com.pgyersdk.feedback.PgyFeedback;
 import com.pgyersdk.update.PgyUpdateManager;
 
 public class MainActivity extends BaseActivity {
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +24,15 @@ public class MainActivity extends BaseActivity {
 
         // 检查更新
         PgyUpdateManager.register(this, "com.diaozhatian.zhazhanote.pugongying_provider");
+
+        // TODO: 2017/10/17
+        ApiTestActivity.start(mBaseActivity);
     }
 
     /** 接口测试 */
     public void onApiTestClick(View view) {
-//        Api.getCode("17098905192").subscribe(result -> {
-//        }, throwable -> {
-//        });
-        Api.postRegister("17098905192", "pppppp", Gender.MALE, "690917").subscribe(httpResult -> {
-
-        }, throwable -> {});
+        // 个人资料
+//        Api.getMyInfo(3150).subscribe(user -> {}, throwable -> {});
     }
 
     /** 反馈 */

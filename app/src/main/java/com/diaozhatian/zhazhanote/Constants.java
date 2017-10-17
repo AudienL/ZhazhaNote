@@ -19,9 +19,12 @@ public class Constants {
     }
 
     public final static String API_CLIENT_TYPE = "Android";
-    public final static String API_RSA_PUBLIC_EXPONENT = "65537";
-    public final static String API_RSA_MODULUS = "107920443544455768016677584168539218636510423190166749858207053111985549971685450681854223707183979763669480082097213075685642473312627579352159815373238385671496948488830337447224954167005534404920894925171926220403339853330972872444943790512686025398908275326951007383446583337775901191019706911982355423473";
 
     public final static String URL_SMS_CODE = HOST + "sms/code.do";// 获取验证码
     public final static String URL_AUTH_REGISTER = HOST + "auth/register.do";// 注册
+    public final static String URL_AUTH_LOGIN = HOST + "auth/login.do";// 登录
+    public final static String URL_AUTH_CHANGE_PASSWORD = HOST + "auth/changePassword.do";// 修改密码
+    public final static String URL_AUTH_RESET_PASSWORD = HOST + "auth/resetPassword.do";// 修改密码_验证码
+    public final static String URL_UPDATE_LOGIN_INFO = HOST + "auth/updateLoginInfo.do";// 记录版本信息
+//    public final static String URL_USER_GET_MY_INFO_BY_ID = HOST + "user/getMyInfoById/{userId}.do";// 个人资料
 }

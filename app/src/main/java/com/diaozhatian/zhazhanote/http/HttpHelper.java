@@ -14,7 +14,7 @@ import io.reactivex.ObservableEmitter;
  * <p>
  * Created by audienl@qq.com on 2017/10/11.
  */
-public class HttpHelper<T> implements Callback.CommonCallback<String> {
+public class HttpHelper<T extends HttpResult> implements Callback.CommonCallback<String> {
     private static final String TAG = "HttpHelper";
 
     private Class<T> mClass;
@@ -29,16 +29,9 @@ public class HttpHelper<T> implements Callback.CommonCallback<String> {
     }
 
     public void post(RequestParams params) {
-        LogUtils.info(TAG, "POST", params.toString());
+        LogUtils.info(TAG, "POST", params.toString(), params.getBodyContent());
         params.setConnectTimeout(mTimeOut);
-        params.setMultipart(true);
-
-        params.addHeader("User-Agent", "Android");
-        params.addHeader("Content-Type", "application/json");
-        params.addHeader("Connection", "keep-alive");
-        params.addHeader("Charsert", "UTF-8");
-        params.addHeader("Content-Length", "128");
-
+        params.setAsJsonContent(true);
         x.http().post(params, this);
     }
 
@@ -57,7 +50,11 @@ public class HttpHelper<T> implements Callback.CommonCallback<String> {
                 mEmitter.onError(new Exception("服务器返回null"));
                 return;
             }
-            mEmitter.onNext(response);
+            if (response.isSuccess()) {
+                mEmitter.onNext(response);
+            } else {
+                mEmitter.onError(new Exception(response.message));
+            }
         } catch (Exception e) {
             mEmitter.onError(e);
         }
