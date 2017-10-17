@@ -44,5 +44,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="记录版本信息"/>
+
+        <Button
+            android:id="@+id/getMyInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="个人资料"/>
     </LinearLayout>
 </ScrollView>

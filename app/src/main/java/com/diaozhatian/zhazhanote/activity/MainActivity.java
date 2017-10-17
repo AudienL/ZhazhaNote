@@ -11,13 +11,15 @@ import com.pgyersdk.activity.FeedbackActivity;
 import com.pgyersdk.feedback.PgyFeedback;
 import com.pgyersdk.update.PgyUpdateManager;
 
+import org.xutils.view.annotation.ContentView;
+
+@ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         // 申请权限
         requestGlobalPermissions();
@@ -27,12 +29,6 @@ public class MainActivity extends BaseActivity {
 
         // TODO: 2017/10/17
         ApiTestActivity.start(mBaseActivity);
-    }
-
-    /** 接口测试 */
-    public void onApiTestClick(View view) {
-        // 个人资料
-//        Api.getMyInfo(3150).subscribe(user -> {}, throwable -> {});
     }
 
     /** 反馈 */

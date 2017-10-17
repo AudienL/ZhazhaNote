@@ -20,10 +20,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="反馈"/>
-
-    <Button
-        android:onClick="onApiTestClick"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:text="接口测试"/>
 </LinearLayout>

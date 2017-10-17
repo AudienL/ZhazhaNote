@@ -27,7 +27,7 @@ public class ApiTestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-    @Event(value = {R.id.register, R.id.login, R.id.getCode, R.id.changePassword, R.id.changePasswordByCode, R.id.updateVersionInfo})
+    @Event(value = {R.id.register, R.id.login, R.id.getMyInfo, R.id.getCode, R.id.changePassword, R.id.changePasswordByCode, R.id.updateVersionInfo})
     private void onClick(View view) {
         switch (view.getId()) {
             case R.id.getCode:
@@ -53,6 +53,10 @@ public class ApiTestActivity extends BaseActivity {
             case R.id.updateVersionInfo:
                 // 记录版本信息
                 Api.updateVersionInfo(3150).subscribe(user -> {}, throwable -> {});
+                break;
+            case R.id.getMyInfo:
+                // 个人资料
+//                Api.getMyInfo(3150).subscribe(user -> {}, throwable -> {});
                 break;
         }
     }

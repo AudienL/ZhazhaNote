@@ -6,6 +6,8 @@ import android.os.Handler;
 
 import com.audienl.superlibrary.base.SuperActivity;
 
+import org.xutils.x;
+
 /**
  * 描述：
  * <p>
@@ -18,21 +20,12 @@ public class BaseActivity extends SuperActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        x.view().inject(this);
         mBaseActivity = this;
     }
 
     /** 检测并申请应用必须的权限，在应用入口调用 */
     public void requestGlobalPermissions() {
-        runOnPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, new Runnable() {
-            @Override
-            public void run() {
-                // nothing
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                // nothing
-            }
-        });
+        runOnPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, () -> {}, () -> {});
     }
 }
