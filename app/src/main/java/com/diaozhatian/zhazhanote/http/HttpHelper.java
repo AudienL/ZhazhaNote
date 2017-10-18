@@ -1,6 +1,8 @@
 package com.diaozhatian.zhazhanote.http;
 
 import com.audienl.superlibrary.utils.LogUtils;
+import com.diaozhatian.zhazhanote.bean.User;
+import com.diaozhatian.zhazhanote.manager.UserManager;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
@@ -32,12 +34,24 @@ public class HttpHelper<T extends HttpResult> implements Callback.CommonCallback
         LogUtils.info(TAG, "POST", params.toString(), params.getBodyContent());
         params.setConnectTimeout(mTimeOut);
         params.setAsJsonContent(true);
+
+        User user = UserManager.getLoginUser();
+        if (user != null && user.token != null) {
+            params.addHeader("token", user.token);
+        }
+
         x.http().post(params, this);
     }
 
     public void get(RequestParams params) {
-        LogUtils.info(TAG, params.toString());
+        LogUtils.info(TAG, "GET", params.toString());
         params.setConnectTimeout(mTimeOut);
+
+        User user = UserManager.getLoginUser();
+        if (user != null && user.token != null) {
+            params.addHeader("token", user.token);
+        }
+
         x.http().get(params, this);
     }
 

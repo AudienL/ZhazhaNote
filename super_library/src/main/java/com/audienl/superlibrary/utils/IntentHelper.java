@@ -17,10 +17,18 @@ public class IntentHelper {
     }
 
     public static Object get(String TAG, String key) {
+        return get(TAG, key, null);
+    }
+
+    public static Object get(String TAG, String key, Object defaultValue) {
         String ownerKey = generateKey(TAG, key);
-        Object obj = mIntentData.get(ownerKey);
-        mIntentData.remove(ownerKey);
-        return obj;
+        if (mIntentData.containsKey(ownerKey)) {
+            Object obj = mIntentData.get(ownerKey);
+            mIntentData.remove(ownerKey);
+            return obj;
+        } else {
+            return defaultValue;
+        }
     }
 
     private static String generateKey(String TAG, String key) {

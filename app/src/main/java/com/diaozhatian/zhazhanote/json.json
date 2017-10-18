@@ -1,6 +1,50 @@
 {
-  "userId": 3150,
-  "userCode": "30503150",
-  "token": "8bd47dd5-3685-4d7c-823a-d8702c37d9b3_3150_1508232577632",
+  "dataList": [
+    {
+      "color": "#FF0000",
+      "display": 1,
+      "updateTime": 1508320452000,
+      "type": "日",
+      "userId": 3150,
+      "content": "这是一个傻逼测试",
+      "userCode": "30503150",
+      "validStatus": 1,
+      "top": 0,
+      "createTime": 1508320452000,
+      "phone": "17098905192",
+      "phoneUniqueCode": "b2217d6d41b6c22c5eced6e4db14c0fa",
+      "id": 9
+    },
+    {
+      "color": "#FF0000",
+      "display": 1,
+      "updateTime": 1508319074000,
+      "type": "日",
+      "userId": 3150,
+      "content": "这是一个傻逼测试",
+      "userCode": "30503150",
+      "validStatus": 0,
+      "top": 0,
+      "createTime": 1508319074000,
+      "phone": "17098905192",
+      "phoneUniqueCode": "b2217d6d41b6c22c5eced6e4db14c0fa",
+      "id": 6
+    },
+    {
+      "color": "#FF0000",
+      "display": 1,
+      "updateTime": 1508318954000,
+      "type": "日",
+      "userId": 3150,
+      "content": "这是一个傻逼测试",
+      "userCode": "30503150",
+      "validStatus": 1,
+      "top": 0,
+      "createTime": 1508318954000,
+      "phone": "17098905192",
+      "phoneUniqueCode": "b2217d6d41b6c22c5eced6e4db14c0fa",
+      "id": 5
+    }
+  ],
   "status": "success"
-}
+} |

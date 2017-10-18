@@ -26,5 +26,11 @@ public class Constants {
     public final static String URL_AUTH_CHANGE_PASSWORD = HOST + "auth/changePassword.do";// 修改密码
     public final static String URL_AUTH_RESET_PASSWORD = HOST + "auth/resetPassword.do";// 修改密码_验证码
     public final static String URL_UPDATE_LOGIN_INFO = HOST + "auth/updateLoginInfo.do";// 记录版本信息
-//    public final static String URL_USER_GET_MY_INFO_BY_ID = HOST + "user/getMyInfoById/{userId}.do";// 个人资料
+    public final static String URL_USER_GET_MY_INFO_BY_ID = HOST + "user/getMyInfoById/%d.do";// 个人资料，参数：userId
+
+    public final static String URL_NOTE_GET_NOTE_LIST = HOST + "note/getNoteList.do";// 便签列表
+    public final static String URL_NOTE_ADD = HOST + "note/add.do";// 新增便签
+    public final static String URL_NOTE_UPDATE = HOST + "note/ update.do";// 修改便签
+    public final static String URL_NOTE_SET_STATUS_BY_ID = HOST + "note/setStatusById/%d-%d.do";// 设置便签状态，参数：id, status(1为有效，0为隐藏)
+    public final static String URL_NOTE_DELETE_BY_ID = HOST + "note/deleteById/%d.do";// 删除便签，参数：id
 }

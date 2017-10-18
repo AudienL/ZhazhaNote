@@ -48,6 +48,7 @@ public class PermissionActivity extends LifeCycleActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // TODO: 2017/10/18  这里有个问题，在A申请权限，然后马上跳转到B，则grantResults.length=0，没处理
         if (mRunnableOnPermissionGranted.containsKey(requestCode)) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 runOnUiThread(mRunnableOnPermissionGranted.get(requestCode));
@@ -58,6 +59,6 @@ public class PermissionActivity extends LifeCycleActivity {
             mRunnableOnPermissionDenied.remove(mRequestCode);
             return;
         }
-        super.onRequestPermissionsResult (requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
