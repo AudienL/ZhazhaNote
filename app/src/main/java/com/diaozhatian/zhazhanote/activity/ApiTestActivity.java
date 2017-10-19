@@ -84,15 +84,11 @@ public class ApiTestActivity extends BaseActivity {
                 // 测试
                 user = UserManager.getLoginUser();
                 if (user != null) {
-                    Api.deleteNote(5).subscribe(result -> {}, throwable -> {});
+                    Api.getNoteDetail(9).subscribe(result -> {}, throwable -> {});
                 }
 
                 break;
 
         }
-    }
-
-    public String test(String aaa) {
-        return null;
     }
 }

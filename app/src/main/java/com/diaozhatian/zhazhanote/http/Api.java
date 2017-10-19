@@ -20,12 +20,22 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 
 /**
- * 描述：
+ * 描述：接口类。
+ * 返回的都是实体类，不需要再 result.data 等操作了。
  * <p>
  * Created by audienl@qq.com on 2017/10/11.
  */
 public class Api {
     private static final String TAG = "Api";
+
+    /** 便签详细信息 */
+    public static Observable<Note> getNoteDetail(int id) {
+        return Observable.create((ObservableOnSubscribe<Note>) e -> {
+            String url = String.format(Locale.CHINA, Constants.URL_NOTE_GET_NOTE_DETAIL, id);
+            final RequestParams params = new RequestParams(url);
+            new HttpHelper<>(Note.class, e, "便签详细信息").get(params);
+        }).map(note -> note.data);
+    }
 
     /** 删除便签 */
     public static Observable<HttpResult> deleteNote(int id) {
@@ -155,7 +165,10 @@ public class Api {
         });
     }
 
-    /** 登录 */
+    /**
+     * 登录
+     * @return {@link User} 不需要 user.data
+     */
     public static Observable<User> login(String mobile, String password) {
         return Observable.create((ObservableOnSubscribe<User>) e -> {
             final RequestParams params = new RequestParams(Constants.URL_AUTH_LOGIN);
@@ -165,9 +178,6 @@ public class Api {
             obj.put("clientType", Constants.API_CLIENT_TYPE);
             params.setBodyContent(obj.toString());
             new HttpHelper<>(User.class, e, "登录").post(params);
-        }).map(user -> {
-            UserManager.saveLoginUser(user);
-            return user;
         });
     }
 

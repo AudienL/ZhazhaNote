@@ -14,6 +14,7 @@ public class Note extends HttpResult<Note> {
     public int id;
     public int validStatus;// 1为有效，0为无效
     public int top;// 1为置顶，0非置顶
+    public int userId;
     @NoteType public String type;
     public String color;// #FFFFFF
     public String userCode;

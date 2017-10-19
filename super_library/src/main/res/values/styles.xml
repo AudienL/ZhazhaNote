@@ -1,9 +1,0 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- BottomDialog动画 -->
-    <style name="BottomDialogAnimation" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter</item>
-        <item name="android:windowExitAnimation">@anim/bottom_dialog_exit</item>
-    </style>
-
-</resources>

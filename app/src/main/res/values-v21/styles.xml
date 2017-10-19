@@ -1,0 +1,12 @@
+<resources>
+
+    <style name="AppTheme" parent="AppTheme.V21"/>
+
+    <style name="AppTheme.V21" parent="AppTheme.V19">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--<item name="android:navigationBarColor">@android:color/holo_red_dark</item>-->
+        <!-- 屏幕底部home等三个虚拟按键，仅能在v21里面设置 -->
+        <!-- 类似于fitSystemView，使得NavigationBar不会挡住底部 -->
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    </style>
+</resources>

@@ -1,11 +1,15 @@
 package com.diaozhatian.zhazhanote.base;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.audienl.superlibrary.base.SuperActivity;
+import com.diaozhatian.zhazhanote.activity.LoginActivity;
+import com.diaozhatian.zhazhanote.activity.MainActivity;
+import com.diaozhatian.zhazhanote.bean.event.RequestLoginEvent;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.xutils.x;
 
 /**
@@ -22,10 +26,20 @@ public class BaseActivity extends SuperActivity {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
         mBaseActivity = this;
+        EventBus.getDefault().register(this);
     }
 
-    /** 检测并申请应用必须的权限，在应用入口调用 */
-    public void requestGlobalPermissions() {
-        runOnPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, () -> {}, () -> {});
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onRequestLogin(RequestLoginEvent event) {
+        if (this instanceof MainActivity) {
+            LoginActivity.start(mBaseActivity);
+        }
+        finish();
     }
 }

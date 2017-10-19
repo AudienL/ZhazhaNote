@@ -6,6 +6,9 @@ import com.alibaba.fastjson.JSON;
 import com.audienl.superlibrary.utils.SPUtils;
 import com.diaozhatian.zhazhanote.base.App;
 import com.diaozhatian.zhazhanote.bean.User;
+import com.diaozhatian.zhazhanote.http.Api;
+
+import io.reactivex.Observable;
 
 /**
  * 描述：
@@ -17,6 +20,23 @@ public class UserManager {
 
     private static User mLoginUser;
 
+    /** 全局统一登录接口 */
+    public static Observable<User> login(String mobile, String password) {
+        return Api.login(mobile, password).map(user -> {
+            UserManager.saveLoginUser(user);
+            return user;
+        });
+    }
+
+    /** 全局统一注销接口 */
+    public static Observable<Boolean> logout() {
+        return Observable.create(e -> {
+            mLoginUser = null;
+            SPUtils.remove(App.instance, TAG, "user");
+            e.onNext(true);
+        });
+    }
+
     public static void saveLoginUser(User user) {
         if (user == null) return;
         mLoginUser = user;
@@ -24,6 +44,9 @@ public class UserManager {
         SPUtils.putString(App.instance, TAG, "user", json);
     }
 
+    /**
+     * 返回 null 说明未登录
+     */
     public static User getLoginUser() {
         if (mLoginUser != null && mLoginUser.token != null) return mLoginUser;
         String json = SPUtils.getString(App.instance, TAG, "user", null);
