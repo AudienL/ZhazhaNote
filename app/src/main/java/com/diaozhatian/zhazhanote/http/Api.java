@@ -3,6 +3,7 @@ package com.diaozhatian.zhazhanote.http;
 import com.audienl.superlibrary.utils.AndroidUtils;
 import com.diaozhatian.zhazhanote.BuildConfig;
 import com.diaozhatian.zhazhanote.Constants;
+import com.diaozhatian.zhazhanote.annotation.CodeType;
 import com.diaozhatian.zhazhanote.annotation.Gender;
 import com.diaozhatian.zhazhanote.annotation.NoteType;
 import com.diaozhatian.zhazhanote.base.App;
@@ -197,10 +198,11 @@ public class Api {
     }
 
     /** 获取验证码 */
-    public static Observable<HttpResult> getCode(String mobile) {
+    public static Observable<HttpResult> getCode(String mobile, @CodeType String type) {
         return Observable.create(e -> {
             final RequestParams params = new RequestParams(Constants.URL_SMS_CODE);
             params.addQueryStringParameter("mobile", mobile);
+            params.addQueryStringParameter("type", type);
             new HttpHelper<>(HttpResult.class, e, "获取验证码").get(params);
         });
     }

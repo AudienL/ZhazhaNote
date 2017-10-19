@@ -1,6 +1,9 @@
 package com.diaozhatian.zhazhanote.http;
 
 import com.audienl.superlibrary.utils.LogUtils;
+import com.audienl.superlibrary.utils.NetworkUtils;
+import com.audienl.superlibrary.utils.ToastUtils;
+import com.diaozhatian.zhazhanote.base.App;
 import com.diaozhatian.zhazhanote.bean.User;
 import com.diaozhatian.zhazhanote.manager.UserManager;
 import com.google.gson.Gson;
@@ -31,6 +34,11 @@ public class HttpHelper<T extends HttpResult> implements Callback.CommonCallback
     }
 
     public void post(RequestParams params) {
+        if (!NetworkUtils.isNetworkAvailable(App.instance)) {
+            ToastUtils.showToast(App.instance, "当前网络不可用，请检查网络");
+            return;
+        }
+
         LogUtils.info(TAG, "POST", params.toString(), params.getBodyContent());
         params.setConnectTimeout(mTimeOut);
         params.setAsJsonContent(true);
@@ -44,6 +52,11 @@ public class HttpHelper<T extends HttpResult> implements Callback.CommonCallback
     }
 
     public void get(RequestParams params) {
+        if (!NetworkUtils.isNetworkAvailable(App.instance)) {
+            ToastUtils.showToast(App.instance, "当前网络不可用，请检查网络");
+            return;
+        }
+
         LogUtils.info(TAG, "GET", params.toString());
         params.setConnectTimeout(mTimeOut);
 

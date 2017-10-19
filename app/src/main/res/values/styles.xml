@@ -11,4 +11,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- BottomVerticalDialog动画 -->
+    <style name="BottomVerticalDialogAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_vertical_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_vertical_dialog_exit</item>
+    </style>
 </resources>

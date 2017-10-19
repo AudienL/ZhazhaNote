@@ -35,7 +35,7 @@ public class ApiTestActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.getCode:
                 // 获取验证码
-                Api.getCode("17098905192").subscribe(result -> {}, throwable -> {});
+//                Api.getCode("17098905192").subscribe(result -> {}, throwable -> {});
                 break;
             case R.id.register:
                 // 注册

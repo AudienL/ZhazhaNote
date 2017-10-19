@@ -59,9 +59,11 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btnRegister:
                 // 注册
+                RegisterActivity.start(mBaseActivity);
                 break;
             case R.id.btnForgetPassword:
                 // 忘记密码
+                ResetPassword.start(mBaseActivity);
                 break;
         }
     }
