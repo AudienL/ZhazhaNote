@@ -5,13 +5,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/main_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.diaozhatian.zhazhanote.activity.MainActivity">
 
-    <Button
-        android:id="@+id/btnSetting"
+    <!-- Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@mipmap/toolbar"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/btnSetting"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@drawable/toolbar_btn">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/toolbar_setting"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            tools:text="傻逼"/>
+
+        <RelativeLayout
+            android:id="@+id/btnAddNote"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@drawable/toolbar_btn">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/toolbar_add"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- 新增便签 -->
+    <EditText
+        android:id="@+id/etAddNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="设置"/>
+        android:background="#F39C12"
+        android:hint="请输入计划内容"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        tools:text="这是一个测试"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- 底部TabList -->
+    <com.diaozhatian.zhazhanote.widget.MainTabListView
+        android:id="@+id/mainTabListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

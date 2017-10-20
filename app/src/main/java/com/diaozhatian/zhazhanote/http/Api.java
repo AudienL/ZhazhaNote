@@ -29,6 +29,18 @@ import io.reactivex.ObservableOnSubscribe;
 public class Api {
     private static final String TAG = "Api";
 
+    /**
+     * 计划置顶
+     * @param status 1为置顶，0为取消置顶
+     */
+    public static Observable<HttpResult> setNoteTopStatus(int id, int status) {
+        return Observable.create((ObservableOnSubscribe<HttpResult>) e -> {
+            String url = String.format(Locale.CHINA, Constants.URL_NOTE_SET_TOP, id, status);
+            final RequestParams params = new RequestParams(url);
+            new HttpHelper<>(HttpResult.class, e, "计划置顶").get(params);
+        });
+    }
+
     /** 便签详细信息 */
     public static Observable<Note> getNoteDetail(int id) {
         return Observable.create((ObservableOnSubscribe<Note>) e -> {
@@ -49,7 +61,7 @@ public class Api {
 
     /**
      * 设置便签状态
-     * @param status 1为有效，0为隐藏
+     * @param status 1为未完成，0为已完成
      */
     public static Observable<HttpResult> updateNoteStatus(int id, int status) {
         return Observable.create((ObservableOnSubscribe<HttpResult>) e -> {

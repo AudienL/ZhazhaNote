@@ -2,7 +2,6 @@ package com.diaozhatian.zhazhanote.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,19 +12,17 @@ import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.manager.UserManager;
 import com.diaozhatian.zhazhanote.widget.Toolbar;
 
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
+import butterknife.BindView;
+import butterknife.OnClick;
 
-@ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar) Toolbar mToolbar;
-    @ViewInject(R.id.etUsername) EditText mEtUsername;
-    @ViewInject(R.id.etPassword) EditText mEtPassword;
-    @ViewInject(R.id.btnLogin) Button mBtnLogin;
-    @ViewInject(R.id.btnRegister) Button mBtnRegister;
-    @ViewInject(R.id.btnForgetPassword) Button mBtnForgetPassword;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.etUsername) EditText mEtUsername;
+    @BindView(R.id.etPassword) EditText mEtPassword;
+    @BindView(R.id.btnLogin) Button mBtnLogin;
+    @BindView(R.id.btnRegister) Button mBtnRegister;
+    @BindView(R.id.btnForgetPassword) Button mBtnForgetPassword;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, LoginActivity.class);
@@ -34,8 +31,16 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void initListeners() {
     }
 
     private void handleLogin() {
@@ -50,8 +55,8 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    @Event(value = {R.id.btnLogin, R.id.btnRegister, R.id.btnForgetPassword})
-    private void onClick(View view) {
+    @OnClick(value = {R.id.btnLogin, R.id.btnRegister, R.id.btnForgetPassword})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
                 // 登录

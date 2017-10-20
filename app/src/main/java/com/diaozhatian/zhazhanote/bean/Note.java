@@ -3,8 +3,6 @@ package com.diaozhatian.zhazhanote.bean;
 import com.diaozhatian.zhazhanote.annotation.NoteType;
 import com.diaozhatian.zhazhanote.http.HttpResult;
 
-import java.util.Date;
-
 /**
  * 描述：
  * <p>
@@ -12,7 +10,7 @@ import java.util.Date;
  */
 public class Note extends HttpResult<Note> {
     public int id;
-    public int validStatus;// 1为有效，0为无效
+    public int validStatus;// 1为未完成，0为已完成
     public int top;// 1为置顶，0非置顶
     public int userId;
     @NoteType public String type;
@@ -22,6 +20,8 @@ public class Note extends HttpResult<Note> {
     public String phone;
     public String phoneUniqueCode;
     public String content;
-    public Date createTime;
-    public Date updateTime;
+    public long createTime;
+    public long updateTime;
+
+    public boolean selected = false;
 }

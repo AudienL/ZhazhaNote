@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#F39C12"
+        android:gravity="start"
+        android:hint="请输入计划内容"
+        android:padding="10dp"
+        android:textColor="@android:color/white"/>
+</LinearLayout>

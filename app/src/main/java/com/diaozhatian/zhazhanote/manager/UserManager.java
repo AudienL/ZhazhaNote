@@ -4,9 +4,13 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.audienl.superlibrary.utils.SPUtils;
+import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.base.App;
 import com.diaozhatian.zhazhanote.bean.User;
+import com.diaozhatian.zhazhanote.bean.event.RequestLoginEvent;
 import com.diaozhatian.zhazhanote.http.Api;
+
+import org.greenrobot.eventbus.EventBus;
 
 import io.reactivex.Observable;
 
@@ -37,6 +41,16 @@ public class UserManager {
         });
     }
 
+    public static User checkUserLogin() {
+        User user = UserManager.getLoginUser();
+        if (user == null) {
+            ToastUtils.showToast(App.instance, "请先登录");
+            EventBus.getDefault().post(new RequestLoginEvent());
+            return null;
+        }
+        return user;
+    }
+    
     public static void saveLoginUser(User user) {
         if (user == null) return;
         mLoginUser = user;

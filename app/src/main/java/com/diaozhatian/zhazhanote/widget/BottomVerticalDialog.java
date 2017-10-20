@@ -1,5 +1,6 @@
 package com.diaozhatian.zhazhanote.widget;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -111,6 +112,12 @@ public class BottomVerticalDialog extends DialogFragment {
         }
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (mOnDismissListener != null) mOnDismissListener.onDismiss();
+    }
+
     public BottomVerticalDialog setTitle(String title) {
         mTitle = title;
         if (mTvTitle != null && title != null) {
@@ -142,5 +149,15 @@ public class BottomVerticalDialog extends DialogFragment {
 
     public interface Callback {
         void onItemClick(int index, String text);
+    }
+
+    private OnDismissListener mOnDismissListener;
+
+    public void setOnDismissListener(OnDismissListener onDismissListener) {
+        mOnDismissListener = onDismissListener;
+    }
+
+    public interface OnDismissListener {
+        void onDismiss();
     }
 }

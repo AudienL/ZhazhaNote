@@ -3,7 +3,6 @@ package com.diaozhatian.zhazhanote.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,16 +16,15 @@ import com.pgyersdk.activity.FeedbackActivity;
 import com.pgyersdk.feedback.PgyFeedback;
 
 import org.greenrobot.eventbus.EventBus;
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
-@ContentView(R.layout.activity_setting)
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class SettingActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar) Toolbar mToolbar;
-    @ViewInject(R.id.btnLogout) Button mBtnLogout;
-    @ViewInject(R.id.btnFeedback) Button mBtnFeedback;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.btnLogout) Button mBtnLogout;
+    @BindView(R.id.btnFeedback) Button mBtnFeedback;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SettingActivity.class);
@@ -34,8 +32,17 @@ public class SettingActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResId() {
+        return R.layout.activity_setting;
+    }
+
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void initListeners() {
+        mToolbar.setOnBackButtonClickListener(view -> finish());
     }
 
     private void feedback() {
@@ -57,8 +64,8 @@ public class SettingActivity extends BaseActivity {
         }, throwable -> {});
     }
 
-    @Event(value = {R.id.btnLogout, R.id.btnFeedback})
-    private void onClick(View view) {
+    @OnClick({R.id.btnLogout, R.id.btnFeedback})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogout:
                 // 注销

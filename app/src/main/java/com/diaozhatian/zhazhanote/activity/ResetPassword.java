@@ -2,7 +2,6 @@ package com.diaozhatian.zhazhanote.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -19,21 +18,19 @@ import com.diaozhatian.zhazhanote.http.Api;
 import com.diaozhatian.zhazhanote.utils.RegularUtils;
 import com.diaozhatian.zhazhanote.widget.Toolbar;
 
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
-
 import java.lang.ref.WeakReference;
 
-@ContentView(R.layout.activity_reset_password)
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class ResetPassword extends BaseActivity {
 
-    @ViewInject(R.id.toolbar) Toolbar mToolbar;
-    @ViewInject(R.id.etMobile) EditText mEtMobile;
-    @ViewInject(R.id.etPassword) EditText mEtPassword;
-    @ViewInject(R.id.btnGetCode) Button mBtnGetCode;
-    @ViewInject(R.id.etCode) EditText mEtCode;
-    @ViewInject(R.id.btnOk) Button mBtnOk;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.etMobile) EditText mEtMobile;
+    @BindView(R.id.etPassword) EditText mEtPassword;
+    @BindView(R.id.btnGetCode) Button mBtnGetCode;
+    @BindView(R.id.etCode) EditText mEtCode;
+    @BindView(R.id.btnOk) Button mBtnOk;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ResetPassword.class);
@@ -41,9 +38,16 @@ public class ResetPassword extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResId() {
+        return R.layout.activity_reset_password;
+    }
 
+    @Override
+    public void init() {
+    }
+
+    @Override
+    public void initListeners() {
         mToolbar.setOnBackButtonClickListener(view -> finish());
     }
 
@@ -93,8 +97,8 @@ public class ResetPassword extends BaseActivity {
         });
     }
 
-    @Event(value = {R.id.btnGetCode, R.id.btnOk})
-    private void onClick(View view) {
+    @OnClick(value = {R.id.btnGetCode, R.id.btnOk})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnGetCode:
                 // 验证码

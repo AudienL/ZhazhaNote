@@ -2,8 +2,6 @@ package com.diaozhatian.zhazhanote.bean;
 
 import com.diaozhatian.zhazhanote.http.HttpResult;
 
-import java.util.Date;
-
 /**
  * 描述：
  * <p>
@@ -33,7 +31,7 @@ public class User extends HttpResult<User> {
     public int height;// 高度
     public int weight;// 体重
     public int validStatus;
-    public Date createTime;
-    public Date updateTime;
-    public Date birthday;
+    public long createTime;
+    public long updateTime;
+    public long birthday;
 }

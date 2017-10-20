@@ -2,7 +2,6 @@ package com.diaozhatian.zhazhanote.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -22,22 +21,20 @@ import com.diaozhatian.zhazhanote.utils.RegularUtils;
 import com.diaozhatian.zhazhanote.widget.BottomVerticalDialog;
 import com.diaozhatian.zhazhanote.widget.Toolbar;
 
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
-
 import java.lang.ref.WeakReference;
 
-@ContentView(R.layout.activity_register)
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class RegisterActivity extends BaseActivity {
 
-    @ViewInject(R.id.toolbar) Toolbar mToolbar;
-    @ViewInject(R.id.itemGender) SettingItem mItemGender;
-    @ViewInject(R.id.etPassword) EditText mEtPassword;
-    @ViewInject(R.id.etMobile) EditText mEtMobile;
-    @ViewInject(R.id.btnGetCode) Button mBtnGetCode;
-    @ViewInject(R.id.etCode) EditText mEtCode;
-    @ViewInject(R.id.btnRegister) Button mBtnRegister;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.itemGender) SettingItem mItemGender;
+    @BindView(R.id.etPassword) EditText mEtPassword;
+    @BindView(R.id.etMobile) EditText mEtMobile;
+    @BindView(R.id.btnGetCode) Button mBtnGetCode;
+    @BindView(R.id.etCode) EditText mEtCode;
+    @BindView(R.id.btnRegister) Button mBtnRegister;
 
     @Gender private String mCurrentGender = Gender.FEMALE;
 
@@ -47,11 +44,17 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResId() {
+        return R.layout.activity_register;
+    }
 
+    @Override
+    public void init() {
         mItemGender.setRightText(mCurrentGender);
+    }
 
+    @Override
+    public void initListeners() {
         mToolbar.setOnBackButtonClickListener(view -> finish());
     }
 
@@ -113,8 +116,8 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    @Event(value = {R.id.itemGender, R.id.btnGetCode, R.id.btnRegister})
-    private void onClick(View view) {
+    @OnClick(value = {R.id.itemGender, R.id.btnGetCode, R.id.btnRegister})
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.itemGender:
                 // 性别

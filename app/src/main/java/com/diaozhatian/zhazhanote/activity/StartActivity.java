@@ -2,7 +2,6 @@ package com.diaozhatian.zhazhanote.activity;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 
 import com.diaozhatian.zhazhanote.R;
@@ -10,15 +9,20 @@ import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.bean.User;
 import com.diaozhatian.zhazhanote.manager.UserManager;
 
-import org.xutils.view.annotation.ContentView;
-
-@ContentView(R.layout.activity_start)
 public class StartActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutResId() {
+        return R.layout.activity_start;
+    }
+
+    @Override
+    public void init() {
         initPermissions();
+    }
+
+    @Override
+    public void initListeners() {
     }
 
     private void initFinished() {

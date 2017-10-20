@@ -34,4 +34,5 @@ public class Constants {
     public final static String URL_NOTE_SET_STATUS_BY_ID = HOST + "note/setStatusById/%d-%d.do";// 设置便签状态，参数：id, status(1为有效，0为隐藏)
     public final static String URL_NOTE_DELETE_BY_ID = HOST + "note/deleteById/%d.do";// 删除便签，参数：id
     public final static String URL_NOTE_GET_NOTE_DETAIL = HOST + "note /get/%d.do";// 便签详细信息，参数：id
+    public final static String URL_NOTE_SET_TOP = HOST + "note/setTop/%d-%d.do";// 计划置顶，参数：id、status(1为置顶，0为取消置顶)
 }
