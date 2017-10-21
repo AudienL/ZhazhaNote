@@ -61,6 +61,8 @@
         </activity>
         <activity android:name=".activity.ResetPassword">
         </activity>
+        <activity android:name=".activity.EditNoteActivity">
+        </activity>
     </application>
 
 </manifest>

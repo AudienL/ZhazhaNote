@@ -75,11 +75,11 @@ public class Api {
      * 修改便签
      * @param color #FFFFFF
      */
-    public static Observable<HttpResult> updateNote(String userId, String content, @NoteType String type, String color) {
+    public static Observable<HttpResult> updateNote(String noteId, String content, @NoteType String type, String color) {
         return Observable.create(e -> {
             final RequestParams params = new RequestParams(Constants.URL_NOTE_UPDATE);
             JSONObject obj = new JSONObject();
-            obj.put("userId", userId);
+            obj.put("id", noteId);
             obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
             obj.put("content", content);
             obj.put("type", type);

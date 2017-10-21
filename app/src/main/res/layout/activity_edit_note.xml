@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/edit_note_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <!-- Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@mipmap/toolbar"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/btn_return"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@drawable/toolbar_btn">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_return"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            tools:text="傻逼"/>
+
+        <RelativeLayout
+            android:id="@+id/btn_save"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:background="@drawable/toolbar_btn">
+
+            <!--<ImageView-->
+            <!--android:layout_width="18dp"-->
+            <!--android:layout_height="18dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@mipmasp/toolbar_add"/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="保存"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@null"
+        android:gravity="start"
+        android:hint="请输入计划内容"
+        android:padding="10dp"
+        android:textColor="#2C3E50"
+        android:textSize="26sp"
+        tools:text="测试"/>
+</LinearLayout>
+

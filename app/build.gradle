@@ -8,8 +8,8 @@ android {
         applicationId "com.diaozhatian.zhazhanote"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 7
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 //        jackOptions {
@@ -66,7 +66,7 @@ dependencies {
     compile 'com.github.AudienL:SuperLibrary:1.0.3'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:8.8.1'
+    testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+        <!--android:background="@drawable/item_note_bg"-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_note_bg"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
