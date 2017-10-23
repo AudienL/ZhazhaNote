@@ -22,7 +22,7 @@
     <com.audienl.superlibrary.widget.SettingItem
         android:id="@+id/item_logout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         app:setting_item_name="注销"/>
 
     <View
