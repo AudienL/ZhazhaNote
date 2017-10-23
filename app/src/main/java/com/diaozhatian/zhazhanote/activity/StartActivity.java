@@ -32,7 +32,9 @@ public class StartActivity extends BaseActivity {
 //            MainActivity.start(mBaseActivity);
 //        }
 //        MainActivity.start(mBaseActivity);
-        MainActivity2.start(mBaseActivity);
+
+        LoginActivity.start(mBaseActivity);
+//        MainActivity2.start(mBaseActivity);
         finish();
     }
 

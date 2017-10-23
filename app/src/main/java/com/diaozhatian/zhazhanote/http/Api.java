@@ -231,12 +231,12 @@ public class Api {
     }
 
     /** 注册 */
-    public static Observable<User> register(String mobile, String password, @Gender String gender, String smsCode) {
+    public static Observable<User> register(String mobile, String password, String smsCode) {
         return Observable.create(e -> {
             final RequestParams params = new RequestParams(Constants.URL_AUTH_REGISTER);
             JSONObject obj = new JSONObject();
             obj.put("mobile", mobile);
-            obj.put("sex", gender);
+            obj.put("sex", Gender.FEMALE);
             obj.put("smsCode", smsCode);
             obj.put("clientType", Constants.API_CLIENT_TYPE);
             obj.put("password", ApiEncryptUtils.encrypt(password));

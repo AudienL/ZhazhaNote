@@ -41,6 +41,9 @@ public class UserManager {
         });
     }
 
+    /**
+     * @return 如果返回null，代表未登录
+     */
     public static User checkUserLogin() {
         User user = UserManager.getLoginUser();
         if (user == null) {
@@ -50,7 +53,7 @@ public class UserManager {
         }
         return user;
     }
-    
+
     public static void saveLoginUser(User user) {
         if (user == null) return;
         mLoginUser = user;

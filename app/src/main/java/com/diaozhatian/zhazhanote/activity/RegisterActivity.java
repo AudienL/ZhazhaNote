@@ -6,19 +6,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.audienl.superlibrary.utils.ToastUtils;
-import com.audienl.superlibrary.widget.SettingItem;
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.annotation.CodeType;
-import com.diaozhatian.zhazhanote.annotation.Gender;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.http.Api;
 import com.diaozhatian.zhazhanote.utils.RegularUtils;
-import com.diaozhatian.zhazhanote.widget.BottomVerticalDialog;
 import com.diaozhatian.zhazhanote.widget.Toolbar;
 
 import java.lang.ref.WeakReference;
@@ -29,14 +25,11 @@ import butterknife.OnClick;
 public class RegisterActivity extends BaseActivity {
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
-    @BindView(R.id.itemGender) SettingItem mItemGender;
     @BindView(R.id.etPassword) EditText mEtPassword;
     @BindView(R.id.etMobile) EditText mEtMobile;
-    @BindView(R.id.btnGetCode) Button mBtnGetCode;
+    @BindView(R.id.btnGetCode) TextView mBtnGetCode;
     @BindView(R.id.etCode) EditText mEtCode;
-    @BindView(R.id.btnRegister) Button mBtnRegister;
-
-    @Gender private String mCurrentGender = Gender.FEMALE;
+    @BindView(R.id.btnRegister) TextView mBtnRegister;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, RegisterActivity.class);
@@ -50,24 +43,11 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void init() {
-        mItemGender.setRightText(mCurrentGender);
     }
 
     @Override
     public void initListeners() {
         mToolbar.setOnLeftButtonClickListener(view -> finish());
-    }
-
-    private void handleItemGender() {
-        BottomVerticalDialog dialog = new BottomVerticalDialog();
-        dialog.setTitle("请选择性别");
-        dialog.setButtonTexts(new String[]{Gender.MALE, Gender.FEMALE});
-        dialog.setCallback((index, text) -> {
-            mCurrentGender = index == 0 ? Gender.MALE : Gender.FEMALE;
-            mItemGender.setRightText(mCurrentGender);
-            dialog.dismiss();
-        });
-        dialog.show(getSupportFragmentManager(), "");
     }
 
     private void handleGetCode() {
@@ -107,7 +87,7 @@ public class RegisterActivity extends BaseActivity {
             return;
         }
 
-        Api.register(mobile, password, mCurrentGender, code).subscribe(user -> {
+        Api.register(mobile, password, code).subscribe(user -> {
             ToastUtils.showToast(mBaseActivity, "注册成功，请登录");
             finish();
         }, throwable -> {
@@ -116,13 +96,9 @@ public class RegisterActivity extends BaseActivity {
         });
     }
 
-    @OnClick(value = {R.id.itemGender, R.id.btnGetCode, R.id.btnRegister})
+    @OnClick(value = {R.id.btnGetCode, R.id.btnRegister})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.itemGender:
-                // 性别
-                handleItemGender();
-                break;
             case R.id.btnGetCode:
                 // 验证码
                 handleGetCode();

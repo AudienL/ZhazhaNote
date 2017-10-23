@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,9 +27,9 @@ public class ResetPassword extends BaseActivity {
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.etMobile) EditText mEtMobile;
     @BindView(R.id.etPassword) EditText mEtPassword;
-    @BindView(R.id.btnGetCode) Button mBtnGetCode;
+    @BindView(R.id.btnGetCode) TextView mBtnGetCode;
     @BindView(R.id.etCode) EditText mEtCode;
-    @BindView(R.id.btnOk) Button mBtnOk;
+    @BindView(R.id.btnOk) TextView mBtnOk;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ResetPassword.class);

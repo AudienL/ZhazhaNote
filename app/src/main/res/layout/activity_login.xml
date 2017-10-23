@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_page"
     android:orientation="vertical"
     tools:context="com.diaozhatian.zhazhanote.activity.LoginActivity">
 
@@ -12,39 +13,54 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:toolbar_right_text="注册"
         app:toolbar_show_left_button="false"
         app:toolbar_title="登录"/>
 
-    <EditText
-        android:id="@+id/etUsername"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="手机号码"
-        android:inputType="phone"
-        android:lines="1"/>
+        android:orientation="vertical"
+        android:padding="48dp">
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="密码"
-        android:lines="1"/>
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/et_bg"
+            android:hint="手机号码"
+            android:inputType="phone"
+            android:lines="1"
+            android:padding="5dp"/>
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登录"/>
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/et_bg"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:padding="5dp"/>
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="注册"/>
+        <TextView
+            android:id="@+id/btnForgetPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:text="忘记密码"/>
 
-    <Button
-        android:id="@+id/btnForgetPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="忘记密码"/>
+        <TextView
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_xml2"
+            android:gravity="center"
+            android:text="登录"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </LinearLayout>
 </LinearLayout>
