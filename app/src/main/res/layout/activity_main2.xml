@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_page"
+    android:orientation="vertical">
+
+    <com.diaozhatian.zhazhanote.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:toolbar_right_icon="@mipmap/toolbar_add"
+        app:toolbar_title="@string/app_name"/>
+
+    <!-- 新增便签 -->
+    <EditText
+        android:id="@+id/etAddNote"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:hint="请输入计划内容"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        tools:text="这是一个测试"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- 底部TabList -->
+    <com.diaozhatian.zhazhanote.widget.MainTabListView
+        android:id="@+id/mainTabListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

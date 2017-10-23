@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_page"
     android:orientation="vertical"
     tools:context="com.diaozhatian.zhazhanote.activity.SettingActivity">
 
@@ -14,15 +15,63 @@
         android:layout_height="wrap_content"
         app:toolbar_title="设置"/>
 
-    <Button
-        android:id="@+id/btnLogout"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="注销"/>
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
 
-    <Button
-        android:id="@+id/btnFeedback"
+    <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_personal_center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="反馈"/>
+        android:layout_height="48dp"
+        app:setting_item_name="个人中心"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
+
+    <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_favor"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:setting_item_name="收藏夹"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
+
+    <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_finished"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:setting_item_name="已完成"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
+
+    <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_help"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:setting_item_name="帮助与反馈"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
+
+    <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_about"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:setting_item_name="关于"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
 </LinearLayout>

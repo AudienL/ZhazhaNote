@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="toolbar">#E67E22</color>
+    <color name="bg_page">#80F39C12</color>
+    <color name="bg_btn_xml_press">#80FFFFFF</color><!-- 按钮背景被按下的颜色 -->
 </resources>

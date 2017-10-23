@@ -48,7 +48,7 @@ public class ResetPassword extends BaseActivity {
 
     @Override
     public void initListeners() {
-        mToolbar.setOnBackButtonClickListener(view -> finish());
+        mToolbar.setOnLeftButtonClickListener(view -> finish());
     }
 
     private void handleGetCode() {

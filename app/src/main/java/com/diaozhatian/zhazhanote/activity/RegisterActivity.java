@@ -55,7 +55,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
-        mToolbar.setOnBackButtonClickListener(view -> finish());
+        mToolbar.setOnLeftButtonClickListener(view -> finish());
     }
 
     private void handleItemGender() {

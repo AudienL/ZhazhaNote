@@ -5,80 +5,66 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <View
+        android:id="@+id/lineTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#80FFFFFF"/>
+
+    <TextView
+        android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_note_bg"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp">
-        <!-- 左边的灰色 -->
-        <TextView
-            android:id="@+id/left"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/tvContent"
-            android:layout_alignTop="@+id/layout_bar"
-            android:background="#f8f3ec"/>
+        android:layout_below="@+id/lineTop"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/btn_select"
+        android:textColor="@color/item_note_content_text_color"
+        android:textSize="18sp"
+        tools:text="这是一个测试"/>
 
-        <RelativeLayout
-            android:id="@+id/layout_bar"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_toRightOf="@+id/left"
-            android:background="#fefcf5">
-
-            <!-- 时间 -->
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:textColor="#80b9a691"
-                android:textSize="12sp"
-                tools:text="2017-10-20"/>
-
-            <!-- 星星 -->
-            <ImageView
-                android:id="@+id/ivStar"
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/star_selected"/>
-        </RelativeLayout>
-
-        <!-- 横线 -->
-        <View
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/layout_bar"
-            android:layout_marginLeft="30dp"
-            android:background="#f1ece3"/>
-
-        <TextView
-            android:id="@+id/tvContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/line"
-            android:layout_toRightOf="@+id/left"
-            android:background="#fefcf5"
-            android:padding="10dp"
-            android:textColor="@color/item_note_content_text_color"
-            android:textSize="18sp"
-            tools:text="这是一个测试"/>
-    </RelativeLayout>
-
-    <!-- 夹子 -->
-    <ImageView
-        android:id="@+id/ivIron"
-        android:layout_width="20dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvContent"
+        android:layout_below="@+id/tvContent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <!-- 时间 -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#80b9a691"
+            android:textSize="12sp"
+            tools:text="2017-10-20"/>
+
+        <!-- 星星 -->
+        <ImageView
+            android:id="@+id/btn_star"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/btn_star"/>
+    </LinearLayout>
+
+    <!-- 选中 -->
+    <ImageView
+        android:id="@+id/btn_select"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        tools:src="@mipmap/item_note_left_iron"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/check_box"/>
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:background="#80FFFFFF"/>-->
 </RelativeLayout>

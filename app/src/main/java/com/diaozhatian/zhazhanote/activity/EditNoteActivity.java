@@ -3,10 +3,7 @@ package com.diaozhatian.zhazhanote.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.audienl.superlibrary.utils.IntentHelper;
 import com.audienl.superlibrary.utils.ToastUtils;
@@ -15,17 +12,15 @@ import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.bean.Note;
 import com.diaozhatian.zhazhanote.bean.event.RequestRefreshNoteListEvent;
 import com.diaozhatian.zhazhanote.http.Api;
+import com.diaozhatian.zhazhanote.widget.Toolbar;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class EditNoteActivity extends BaseActivity {
     private static final String TAG = "EditNoteActivity";
-    @BindView(R.id.btn_return) RelativeLayout mBtnReturn;
-    @BindView(R.id.tvTitle) TextView mTvTitle;
-    @BindView(R.id.btn_save) RelativeLayout mBtnSave;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.et_content) EditText mEtContent;
 
     private boolean isNewNote;
@@ -51,7 +46,7 @@ public class EditNoteActivity extends BaseActivity {
         isNewNote = (boolean) IntentHelper.get(TAG, "is_new_note", true);
         mOldNote = (Note) IntentHelper.get(TAG, "old_note", null);
 
-        mTvTitle.setText(isNewNote ? "新建计划" : "更改计划");
+        mToolbar.setTitle(isNewNote ? "新建计划" : "更改计划");
         if (mOldNote != null) {
             mEtContent.setText(mOldNote.content);
         }
@@ -61,25 +56,12 @@ public class EditNoteActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
-    }
-
-    @OnClick({R.id.btn_return, R.id.btn_save})
-    public void onViewClicked(View view) {
-        String content = mEtContent.getText().toString();
-        switch (view.getId()) {
-            case R.id.btn_return:
-                // 新建、有修改过
-                // 更改、有修改过
-                if ((isNewNote && content.length() > 0) || (!isNewNote && !content.equals(mOldNote.content))) {
-                    new AlertDialog.Builder(mBaseActivity).setMessage("您有修改过的内容，确定不保存吗？").setNegativeButton("不保存", (dialog, which) -> finish()).setPositiveButton("继续修改", null).show();
-                    return;
-                }
-                finish();
-                break;
-            case R.id.btn_save:
-                if (isNewNote) {
-                    ToastUtils.showToast(mBaseActivity, "未实现");
-                    return;
+        mToolbar.setOnLeftButtonClickListener(view -> onBackPressed());
+        mToolbar.setOnRightButtonClickListener(view -> {
+            String content = mEtContent.getText().toString();
+            if (isNewNote) {
+                ToastUtils.showToast(mBaseActivity, "未实现");
+                return;
 //                    if (TextUtils.isEmpty(content)) {
 //                        ToastUtils.showToast(mBaseActivity, "请输入计划内容");
 //                        return;
@@ -92,16 +74,27 @@ public class EditNoteActivity extends BaseActivity {
 //                    }, throwable -> {
 //                        ToastUtils.showToast(mBaseActivity, throwable.getMessage());
 //                    });
-                } else {
-                    Api.updateNote(String.valueOf(mOldNote.id), content, mOldNote.type, "#FFFFFF").subscribe(result -> {
-                        ToastUtils.showToast(mBaseActivity, "更改计划成功");
-                        EventBus.getDefault().post(new RequestRefreshNoteListEvent(mOldNote.type));
-                        finish();
-                    }, throwable -> {
-                        ToastUtils.showToast(mBaseActivity, throwable.getMessage());
-                    });
-                }
-                break;
+            } else {
+                Api.updateNote(String.valueOf(mOldNote.id), content, mOldNote.type, "#FFFFFF").subscribe(result -> {
+                    ToastUtils.showToast(mBaseActivity, "更改计划成功");
+                    EventBus.getDefault().post(new RequestRefreshNoteListEvent(mOldNote.type));
+                    finish();
+                }, throwable -> {
+                    ToastUtils.showToast(mBaseActivity, throwable.getMessage());
+                });
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 新建、有修改过
+        // 更改、有修改过
+        String content = mEtContent.getText().toString();
+        if ((isNewNote && content.length() > 0) || (!isNewNote && !content.equals(mOldNote.content))) {
+            new AlertDialog.Builder(mBaseActivity).setMessage("您有修改过的内容，确定不保存吗？").setNegativeButton("不保存", (dialog, which) -> finish()).setPositiveButton("继续修改", null).show();
+            return;
         }
+        super.onBackPressed();
     }
 }

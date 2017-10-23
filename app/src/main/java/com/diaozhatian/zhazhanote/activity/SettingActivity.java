@@ -4,18 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
-import com.diaozhatian.zhazhanote.bean.event.RequestLoginEvent;
-import com.diaozhatian.zhazhanote.manager.UserManager;
 import com.diaozhatian.zhazhanote.widget.Toolbar;
 import com.pgyersdk.activity.FeedbackActivity;
 import com.pgyersdk.feedback.PgyFeedback;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,8 +18,6 @@ import butterknife.OnClick;
 public class SettingActivity extends BaseActivity {
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
-    @BindView(R.id.btnLogout) Button mBtnLogout;
-    @BindView(R.id.btnFeedback) Button mBtnFeedback;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, SettingActivity.class);
@@ -42,7 +35,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initListeners() {
-        mToolbar.setOnBackButtonClickListener(view -> finish());
+        mToolbar.setOnLeftButtonClickListener(view -> finish());
     }
 
     private void feedback() {
@@ -58,22 +51,28 @@ public class SettingActivity extends BaseActivity {
         });
     }
 
-    private void logout() {
-        UserManager.logout().subscribe(ok -> {
-            EventBus.getDefault().post(new RequestLoginEvent());
-        }, throwable -> {});
-    }
-
-    @OnClick({R.id.btnLogout, R.id.btnFeedback})
+    @OnClick({R.id.item_personal_center, R.id.item_favor, R.id.item_finished, R.id.item_help, R.id.item_about})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnLogout:
-                // 注销
-                logout();
+            case R.id.item_personal_center:
+                // 个人中心
+                PersonalCenterActivity.start(mBaseActivity);
                 break;
-            case R.id.btnFeedback:
-                // 反馈
-                feedback();
+            case R.id.item_favor:
+                // 收藏夹
+                FavorNoteListActivity.start(mBaseActivity);
+                break;
+            case R.id.item_finished:
+                // 已完成
+                FinishedNoteListActivity.start(mBaseActivity);
+                break;
+            case R.id.item_help:
+                // 帮助与反馈
+                ToastUtils.showToast(mBaseActivity, "等待后台给页面URL");
+                break;
+            case R.id.item_about:
+                // 关于
+                ToastUtils.showToast(mBaseActivity, "等待后台给页面URL");
                 break;
         }
     }

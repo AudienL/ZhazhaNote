@@ -6,8 +6,6 @@ import android.support.v7.app.AlertDialog;
 
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
-import com.diaozhatian.zhazhanote.bean.User;
-import com.diaozhatian.zhazhanote.manager.UserManager;
 
 public class StartActivity extends BaseActivity {
 
@@ -26,13 +24,15 @@ public class StartActivity extends BaseActivity {
     }
 
     private void initFinished() {
-        User user = UserManager.getLoginUser();
-        if (user == null) {
-            // 需要登录
-            LoginActivity.start(mBaseActivity);
-        } else {
-            MainActivity.start(mBaseActivity);
-        }
+//        User user = UserManager.getLoginUser();
+//        if (user == null) {
+//            // 需要登录
+//            LoginActivity.start(mBaseActivity);
+//        } else {
+//            MainActivity.start(mBaseActivity);
+//        }
+//        MainActivity.start(mBaseActivity);
+        MainActivity2.start(mBaseActivity);
         finish();
     }
 

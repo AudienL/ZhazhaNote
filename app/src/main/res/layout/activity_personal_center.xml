@@ -12,18 +12,21 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:toolbar_right_text="保存"/>
+        app:toolbar_title="个人中心"/>
 
-    <EditText
-        android:id="@+id/et_content"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@null"
-        android:gravity="start"
-        android:hint="请输入计划内容"
-        android:padding="10dp"
-        android:textColor="#2C3E50"
-        android:textSize="26sp"
-        tools:text="测试"/>
-</LinearLayout>
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
 
+    <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:setting_item_name="注销"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
+</LinearLayout>

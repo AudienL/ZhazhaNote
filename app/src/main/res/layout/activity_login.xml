@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:toolbar_show_back_button="false"
+        app:toolbar_show_left_button="false"
         app:toolbar_title="登录"/>
 
     <EditText

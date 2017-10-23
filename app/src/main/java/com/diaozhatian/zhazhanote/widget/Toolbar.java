@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
+import com.diaozhatian.zhazhanote.R;
+
 /**
  * 描述：
  * <p>
@@ -22,5 +24,6 @@ public class Toolbar extends com.audienl.superlibrary.widget.Toolbar {
 
     public Toolbar(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setBackgroundColor(getResources().getColor(R.color.toolbar));
     }
 }
