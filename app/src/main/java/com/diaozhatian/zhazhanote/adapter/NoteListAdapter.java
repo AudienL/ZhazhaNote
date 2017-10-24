@@ -67,7 +67,7 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
 
         // 点击选择
         holder.mBtnSelect.setOnClickListener(v -> {
-            Api.updateNoteStatus(note.id, holder.mBtnSelect.isSelected() ? 1 : 0).subscribe(result -> {
+            Api.updateNoteStatus(note.id, holder.mBtnSelect.isSelected() ? 0 : 1).subscribe(result -> {
                 EventBus.getDefault().post(new RequestRefreshNoteListEvent(note.type));
             }, throwable -> {
                 ToastUtils.showToast(mContext, throwable.getMessage());

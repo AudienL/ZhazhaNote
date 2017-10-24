@@ -96,14 +96,14 @@ public class Api {
     }
 
     /**
-     * 设置便签状态
-     * @param status 1为未完成，0为已完成
+     * 设置完成
+     * @param status 1为已完成，0为未完成
      */
     public static Observable<HttpResult> updateNoteStatus(int id, int status) {
         return Observable.create((ObservableOnSubscribe<HttpResult>) e -> {
             String url = String.format(Locale.CHINA, Constants.URL_NOTE_SET_STATUS_BY_ID, id, status);
             final RequestParams params = new RequestParams(url);
-            new HttpHelper<>(HttpResult.class, e, "设置便签状态").get(params);
+            new HttpHelper<>(HttpResult.class, e, "设置完成").get(params);
         });
     }
 
@@ -146,13 +146,14 @@ public class Api {
     /**
      * 便签列表
      */
-    public static Observable<List<Note>> getNoteList(String userId, @NoteType String type, int page, int pageSize) {
+    public static Observable<List<Note>> getNoteList(String userId, @NoteType String type, boolean display, int page, int pageSize) {
         return Observable.create((ObservableOnSubscribe<Note>) e -> {
             final RequestParams params = new RequestParams(Constants.URL_NOTE_GET_NOTE_LIST);
             JSONObject obj = new JSONObject();
             obj.put("userId", userId);
             obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
             obj.put("type", type);
+            obj.put("display", display ? "1" : "0");
             obj.put("page", String.valueOf(page));
             obj.put("pageSize", String.valueOf(pageSize));
             params.setBodyContent(obj.toString());

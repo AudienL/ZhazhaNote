@@ -54,6 +54,17 @@
         android:background="@android:color/white"/>
 
     <com.audienl.superlibrary.widget.SettingItem
+        android:id="@+id/item_deleted"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:setting_item_name="回收站"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/white"/>
+
+    <com.audienl.superlibrary.widget.SettingItem
         android:id="@+id/item_help"
         android:layout_width="match_parent"
         android:layout_height="48dp"

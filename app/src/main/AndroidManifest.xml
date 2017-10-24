@@ -71,6 +71,8 @@
         </activity>
         <activity android:name=".activity.PersonalCenterActivity">
         </activity>
+        <activity android:name=".activity.DeletedNoteListActivity">
+        </activity>
     </application>
 
 </manifest>

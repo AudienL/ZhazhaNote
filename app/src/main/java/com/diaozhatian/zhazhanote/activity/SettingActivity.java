@@ -51,7 +51,7 @@ public class SettingActivity extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.item_personal_center, R.id.item_favor, R.id.item_finished, R.id.item_help, R.id.item_about})
+    @OnClick({R.id.item_personal_center, R.id.item_favor, R.id.item_finished, R.id.item_help, R.id.item_deleted, R.id.item_about})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_personal_center:
@@ -65,6 +65,10 @@ public class SettingActivity extends BaseActivity {
             case R.id.item_finished:
                 // 已完成
                 FinishedNoteListActivity.start(mBaseActivity);
+                break;
+            case R.id.item_deleted:
+                // 回收站
+                DeletedNoteListActivity.start(mBaseActivity);
                 break;
             case R.id.item_help:
                 // 帮助与反馈

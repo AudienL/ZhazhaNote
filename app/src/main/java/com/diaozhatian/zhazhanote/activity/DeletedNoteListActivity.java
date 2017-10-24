@@ -1,57 +1,40 @@
-package com.diaozhatian.zhazhanote.fragment;
+package com.diaozhatian.zhazhanote.activity;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
-import com.diaozhatian.zhazhanote.activity.EditNoteActivity;
 import com.diaozhatian.zhazhanote.adapter.NoteListAdapter;
-import com.diaozhatian.zhazhanote.annotation.NoteType;
-import com.diaozhatian.zhazhanote.base.BaseFragment;
+import com.diaozhatian.zhazhanote.base.App;
+import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.bean.User;
-import com.diaozhatian.zhazhanote.bean.event.OnAddNoteSuccessEvent;
-import com.diaozhatian.zhazhanote.bean.event.RequestRefreshNoteListEvent;
 import com.diaozhatian.zhazhanote.http.Api;
 import com.diaozhatian.zhazhanote.manager.UserManager;
 import com.diaozhatian.zhazhanote.widget.BottomVerticalDialog;
 import com.diaozhatian.zhazhanote.widget.EmptyView;
+import com.diaozhatian.zhazhanote.widget.Toolbar;
 import com.diaozhatian.zhazhanote.widget.XRecyclerView2;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
-public class MainFragment2 extends BaseFragment {
+public class DeletedNoteListActivity extends BaseActivity {
+
+    @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.recyclerView) XRecyclerView2 mRecyclerView;
     @BindView(R.id.emptyView) EmptyView mEmptyView;
 
     private NoteListAdapter mNoteListAdapter;
-    private String mNoteType;
 
-    public MainFragment2() {
-        // Required empty public constructor
-    }
-
-    public static MainFragment2 newInstance(@NoteType String noteType) {
-        MainFragment2 fragment = new MainFragment2();
-        Bundle args = new Bundle();
-        args.putString("note_type", noteType);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mNoteType = getArguments().getString("note_type");
-        }
+    public static void start(Context context) {
+        Intent starter = new Intent(context, DeletedNoteListActivity.class);
+        context.startActivity(starter);
     }
 
     @Override
     public int getLayoutResId() {
-        return R.layout.fragment_main_fragment2;
+        return R.layout.activity_deleted_note_list;
     }
 
     @Override
@@ -64,13 +47,12 @@ public class MainFragment2 extends BaseFragment {
 
     @Override
     public void initListeners() {
+        mToolbar.setOnLeftButtonClickListener(view -> finish());
+
         mRecyclerView.setOnRefreshListener(this::request);
         mRecyclerView.setOnLoadMoreListener(this::request);
 
-        mNoteListAdapter.setOnItemClickListener((view, i, note) -> {
-//            updateNote(note);
-            EditNoteActivity.start(mBaseActivity, false, note);
-        });
+        mNoteListAdapter.setOnItemClickListener((view, i, note) -> EditNoteActivity.start(mBaseActivity, false, note));
 
         mNoteListAdapter.setOnItemLongClickListener((view, i, note) -> {
             note.selected = true;
@@ -115,42 +97,13 @@ public class MainFragment2 extends BaseFragment {
         User user = UserManager.getLoginUser();
         if (user != null) userId = String.valueOf(user.userId);
 
-        Api.getNoteList(userId, mNoteType, true, page, pageSize).subscribe(notes -> {
-            // 排序
-//            List<Note> topList = new ArrayList<>();
-//            List<Note> normalList = new ArrayList<>();
-//            List<Note> finishList = new ArrayList<>();
-//            for (Note note : notes) {
-//                if (note.validStatus == 0) {
-//                    // 已完成
-//                    finishList.add(note);
-//                } else if (note.top == 1) {
-//                    // 置顶
-//                    topList.add(note);
-//                } else {
-//                    // 正常
-//                    normalList.add(note);
-//                }
-//            }
-//            topList.addAll(normalList);
-//            topList.addAll(finishList);
+//        Api.getNoteList(userId, )
+        Api.getFinishedNoteList(page, pageSize).subscribe(notes -> mRecyclerView.handleOnNext(notes), throwable -> {
+            mRecyclerView.handleOnError();
 
-//            mRecyclerView.handleOnNext(topList);
-            mRecyclerView.handleOnNext(notes);
-        }, throwable -> mRecyclerView.handleOnError());
-    }
+            // TODO: 2017/10/23
+            ToastUtils.showToast(App.instance, "等待后台给接口");
 
-    @Subscribe
-    public void onAddNoteSuccess(OnAddNoteSuccessEvent event) {
-        if (mNoteType.equals(event.noteType)) {
-            mRecyclerView.refresh();
-        }
-    }
-
-    @Subscribe
-    public void onRequestRefreshNoteList(RequestRefreshNoteListEvent event) {
-        if (mNoteType.equals(event.noteType)) {
-            mRecyclerView.refresh();
-        }
+        });
     }
 }
