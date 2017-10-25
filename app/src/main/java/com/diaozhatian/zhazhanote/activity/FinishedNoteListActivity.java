@@ -45,7 +45,7 @@ public class FinishedNoteListActivity extends BaseActivity {
     public void init() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mBaseActivity));
         mRecyclerView.setEmptyView(mEmptyView);
-        mNoteListAdapter = new NoteListAdapter(mBaseActivity);
+        mNoteListAdapter = new NoteListAdapter(mBaseActivity, true);
         mRecyclerView.setAdapter(mNoteListAdapter);
     }
 

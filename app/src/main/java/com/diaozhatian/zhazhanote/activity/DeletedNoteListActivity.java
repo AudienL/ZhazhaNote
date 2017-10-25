@@ -41,7 +41,7 @@ public class DeletedNoteListActivity extends BaseActivity {
     public void init() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mBaseActivity));
         mRecyclerView.setEmptyView(mEmptyView);
-        mNoteListAdapter = new NoteListAdapter(mBaseActivity);
+        mNoteListAdapter = new NoteListAdapter(mBaseActivity, true);
         mRecyclerView.setAdapter(mNoteListAdapter);
     }
 
@@ -97,8 +97,7 @@ public class DeletedNoteListActivity extends BaseActivity {
         User user = UserManager.getLoginUser();
         if (user != null) userId = String.valueOf(user.userId);
 
-//        Api.getNoteList(userId, )
-        Api.getFinishedNoteList(page, pageSize).subscribe(notes -> mRecyclerView.handleOnNext(notes), throwable -> {
+        Api.getNoteList(userId, null, false, page, pageSize).subscribe(notes -> mRecyclerView.handleOnNext(notes), throwable -> {
             mRecyclerView.handleOnError();
 
             // TODO: 2017/10/23

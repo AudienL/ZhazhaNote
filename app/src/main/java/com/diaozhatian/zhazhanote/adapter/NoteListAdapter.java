@@ -28,8 +28,15 @@ import butterknife.ButterKnife;
  * Created by audienl@qq.com on 2017/10/20.
  */
 public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
+    private boolean showNoteType = false;
+
     public NoteListAdapter(Context context) {
         super(context);
+    }
+
+    public NoteListAdapter(Context context, boolean showNoteType) {
+        super(context);
+        this.showNoteType = showNoteType;
     }
 
     @Override
@@ -44,6 +51,10 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
         holder.mTvContent.setText(note.content);
         holder.mTvTime.setText(DateUtils.format("yyyy.MM.dd HH:mm", note.updateTime));
         holder.mBtnStar.setSelected(note.top == 1);
+
+        // NoteType
+        holder.mTvNoteType.setVisibility(showNoteType ? View.VISIBLE : View.GONE);
+        holder.mTvNoteType.setText(note.type + "计划");
 
         if (note.validStatus == 0) {
             // 已完成
@@ -78,6 +89,7 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvContent) TextView mTvContent;
         @BindView(R.id.tvTime) TextView mTvTime;
+        @BindView(R.id.tv_note_type) TextView mTvNoteType;
         @BindView(R.id.btn_star) ImageView mBtnStar;
         @BindView(R.id.btn_select) ImageView mBtnSelect;
 

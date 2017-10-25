@@ -40,13 +40,21 @@
             android:textColor="#80b9a691"
             android:textSize="12sp"
             tools:text="2017-10-20"/>
-
+        <!-- 日计划、月计划 -->
+        <TextView
+            android:id="@+id/tv_note_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#80b9a691"
+            android:textSize="12sp"
+            tools:text="日计划"/>
         <!-- 星星 -->
         <ImageView
             android:id="@+id/btn_star"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:src="@drawable/btn_star"/>
     </LinearLayout>
