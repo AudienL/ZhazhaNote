@@ -85,4 +85,12 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@android:color/white"/>
+
+    <!-- 测试 -->
+    <EditText
+        android:id="@+id/et_push_cid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+    <!-- 测试 -->
 </LinearLayout>

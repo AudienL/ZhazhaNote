@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.EditText;
 
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
+import com.diaozhatian.zhazhanote.manager.GTManager;
 import com.diaozhatian.zhazhanote.widget.Toolbar;
 import com.pgyersdk.activity.FeedbackActivity;
 import com.pgyersdk.feedback.PgyFeedback;
@@ -31,6 +33,10 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void init() {
+        // TODO: 2017/10/31  测试
+        EditText etPushCid = (EditText) findViewById(R.id.et_push_cid);
+        etPushCid.setText(GTManager.getCID() == null ? "请重试" : GTManager.getCID());
+        // TODO: 2017/10/31  测试
     }
 
     @Override

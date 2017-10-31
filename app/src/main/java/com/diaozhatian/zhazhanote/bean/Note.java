@@ -12,6 +12,7 @@ public class Note extends HttpResult<Note> {
     public int id;
     public int validStatus;// 1为未完成，0为已完成
     public int top;// 1为置顶，0非置顶
+    public int finish;// 1为已完成，0为未完成
     public int userId;
     @NoteType public String type;
     public String color;// #FFFFFF

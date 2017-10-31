@@ -12,6 +12,7 @@ buildscript {
         jcenter()
         mavenCentral()
         maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
+        maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
@@ -28,6 +29,7 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
+        maven { url "http://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
     }
 }
 

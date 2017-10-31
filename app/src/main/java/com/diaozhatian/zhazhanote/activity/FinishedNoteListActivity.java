@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.adapter.NoteListAdapter;
-import com.diaozhatian.zhazhanote.base.App;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.http.Api;
 import com.diaozhatian.zhazhanote.widget.BottomVerticalDialog;
@@ -97,16 +96,6 @@ public class FinishedNoteListActivity extends BaseActivity {
     }
 
     private void request(int page, int pageSize) {
-//        String userId = "";
-//        User user = UserManager.getLoginUser();
-//        if (user != null) userId = String.valueOf(user.userId);
-
-        Api.getFinishedNoteList(page, pageSize).subscribe(notes -> mRecyclerView.handleOnNext(notes), throwable -> {
-            mRecyclerView.handleOnError();
-
-            // TODO: 2017/10/23
-            ToastUtils.showToast(App.instance, "等待后台给接口");
-
-        });
+        Api.getFinishedNoteList(page, pageSize).subscribe(notes -> mRecyclerView.handleOnNext(notes), throwable -> mRecyclerView.handleOnError());
     }
 }

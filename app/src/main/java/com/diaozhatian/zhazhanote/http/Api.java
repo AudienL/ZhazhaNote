@@ -30,50 +30,75 @@ public class Api {
     private static final String TAG = "Api";
 
     /**
+     * 便签列表
+     * @param type   不传则传null，查所有
+     * @param top    1为置顶，0为非置顶，-1为所有
+     * @param finish 1为已完成，0为未完成，-1为所有
+     */
+    public static Observable<List<Note>> getNoteList(String tag, String type, boolean display, int top, int finish, int page, int pageSize) {
+        return Observable.create((ObservableOnSubscribe<Note>) e -> {
+            final RequestParams params = new RequestParams(Constants.URL_NOTE_GET_NOTE_LIST);
+            JSONObject obj = new JSONObject();
+
+            User user = UserManager.getLoginUser();
+            if (user != null) obj.put("userId", String.valueOf(user.userId));
+
+            if (top != -1) obj.put("top", top);
+            if (finish != -1) obj.put("finish", finish);
+            if (type != null) obj.put("type", type);
+
+            obj.put("display", display ? "1" : "0");
+            obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
+            obj.put("page", String.valueOf(page));
+            obj.put("pageSize", String.valueOf(pageSize));
+            params.setBodyContent(obj.toString());
+            new HttpHelper<>(Note.class, e, tag).post(params);
+        }).map(note -> note.dataList);
+    }
+
+    /**
+     * 便签列表
+     */
+    public static Observable<List<Note>> getMainNoteList(@NoteType String type, int page, int pageSize) {
+        return getNoteList("便签列表", type, true, -1, -1, page, pageSize);
+    }
+
+    /**
      * 收藏夹列表
      */
     public static Observable<List<Note>> getFavorNoteList(int page, int pageSize) {
-        return Observable.create((ObservableOnSubscribe<Note>) e -> {
-//            final RequestParams params = new RequestParams(Constants.URL_NOTE_GET_NOTE_LIST);
-//            JSONObject obj = new JSONObject();
-//            obj.put("userId", userId);
-//            obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
-//            obj.put("type", type);
-//            obj.put("page", String.valueOf(page));
-//            obj.put("pageSize", String.valueOf(pageSize));
-//            params.setBodyContent(obj.toString());
-//            new HttpHelper<>(Note.class, e, "收藏夹列表").post(params);
-            e.onError(new Exception());
-        }).map(note -> note.dataList);
+        return getNoteList("收藏夹列表", null, true, 1, -1, page, pageSize);
     }
 
     /**
      * 已完成列表
      */
     public static Observable<List<Note>> getFinishedNoteList(int page, int pageSize) {
-        return Observable.create((ObservableOnSubscribe<Note>) e -> {
-//            final RequestParams params = new RequestParams(Constants.URL_NOTE_GET_NOTE_LIST);
-//            JSONObject obj = new JSONObject();
-//            obj.put("userId", userId);
-//            obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
-//            obj.put("type", type);
-//            obj.put("page", String.valueOf(page));
-//            obj.put("pageSize", String.valueOf(pageSize));
-//            params.setBodyContent(obj.toString());
-//            new HttpHelper<>(Note.class, e, "已完成列表").post(params);
-            e.onError(new Exception());
-        }).map(note -> note.dataList);
+        return getNoteList("已完成列表", null, true, -1, 1, page, pageSize);
+    }
+
+    /**
+     * 回收站列表
+     */
+    public static Observable<List<Note>> getDeletedNoteList(int page, int pageSize) {
+        return getNoteList("回收站列表", null, false, -1, -1, page, pageSize);
     }
 
     /**
      * 计划置顶
-     * @param status 1为置顶，0为取消置顶
+     * @param top 1为置顶，0为取消置顶
      */
-    public static Observable<HttpResult> setNoteTopStatus(int id, int status) {
+    public static Observable<HttpResult> setNoteTopStatus(int id, int top) {
         return Observable.create((ObservableOnSubscribe<HttpResult>) e -> {
-            String url = String.format(Locale.CHINA, Constants.URL_NOTE_SET_TOP, id, status);
-            final RequestParams params = new RequestParams(url);
-            new HttpHelper<>(HttpResult.class, e, "计划置顶").get(params);
+            final RequestParams params = new RequestParams(Constants.URL_NOTE_SET_TOP);
+            JSONObject obj = new JSONObject();
+            User user = UserManager.getLoginUser();
+            if (user != null) obj.put("userId", String.valueOf(user.userId));
+            obj.put("id", String.valueOf(id));
+            obj.put("top", String.valueOf(top));
+            obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
+            params.setBodyContent(obj.toString());
+            new HttpHelper<>(HttpResult.class, e, "计划置顶").post(params);
         });
     }
 
@@ -97,13 +122,19 @@ public class Api {
 
     /**
      * 设置完成
-     * @param status 1为已完成，0为未完成
+     * @param finish 1为已完成，0为未完成
      */
-    public static Observable<HttpResult> updateNoteStatus(int id, int status) {
+    public static Observable<HttpResult> setFinished(int id, int finish) {
         return Observable.create((ObservableOnSubscribe<HttpResult>) e -> {
-            String url = String.format(Locale.CHINA, Constants.URL_NOTE_SET_STATUS_BY_ID, id, status);
-            final RequestParams params = new RequestParams(url);
-            new HttpHelper<>(HttpResult.class, e, "设置完成").get(params);
+            final RequestParams params = new RequestParams(Constants.URL_NOTE_SET_STATUS_BY_ID);
+            JSONObject obj = new JSONObject();
+            User user = UserManager.getLoginUser();
+            if (user != null) obj.put("userId", String.valueOf(user.userId));
+            obj.put("id", String.valueOf(id));
+            obj.put("finish", String.valueOf(finish));
+            obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
+            params.setBodyContent(obj.toString());
+            new HttpHelper<>(HttpResult.class, e, "设置完成").post(params);
         });
     }
 
@@ -115,6 +146,8 @@ public class Api {
         return Observable.create(e -> {
             final RequestParams params = new RequestParams(Constants.URL_NOTE_UPDATE);
             JSONObject obj = new JSONObject();
+            User user = UserManager.getLoginUser();
+            if (user != null) obj.put("userId", String.valueOf(user.userId));
             obj.put("id", noteId);
             obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
             obj.put("content", content);
@@ -141,24 +174,6 @@ public class Api {
             params.setBodyContent(obj.toString());
             new HttpHelper<>(HttpResult.class, e, "新增便签").post(params);
         });
-    }
-
-    /**
-     * 便签列表
-     */
-    public static Observable<List<Note>> getNoteList(String userId, @NoteType String type, boolean display, int page, int pageSize) {
-        return Observable.create((ObservableOnSubscribe<Note>) e -> {
-            final RequestParams params = new RequestParams(Constants.URL_NOTE_GET_NOTE_LIST);
-            JSONObject obj = new JSONObject();
-            obj.put("userId", userId);
-            obj.put("phoneUniqueCode", AndroidUtils.getDeviceUniqueId(App.instance));
-            obj.put("type", type);
-            obj.put("display", display ? "1" : "0");
-            obj.put("page", String.valueOf(page));
-            obj.put("pageSize", String.valueOf(pageSize));
-            params.setBodyContent(obj.toString());
-            new HttpHelper<>(Note.class, e, "便签列表").post(params);
-        }).map(note -> note.dataList);
     }
 
     /** 个人资料 */

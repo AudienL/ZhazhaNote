@@ -115,7 +115,7 @@ public class MainFragment2 extends BaseFragment {
         User user = UserManager.getLoginUser();
         if (user != null) userId = String.valueOf(user.userId);
 
-        Api.getNoteList(userId, mNoteType, true, page, pageSize).subscribe(notes -> {
+        Api.getMainNoteList(mNoteType, page, pageSize).subscribe(notes -> {
             // 排序
 //            List<Note> topList = new ArrayList<>();
 //            List<Note> normalList = new ArrayList<>();

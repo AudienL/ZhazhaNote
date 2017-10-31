@@ -8,13 +8,23 @@ android {
         applicationId "com.diaozhatian.zhazhanote"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 10
-        versionName "1.2.1"
+        versionCode 12
+        versionName "1.2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 //        jackOptions {
 //            enabled true
 //        }
+
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "hJTOiqdwKMAaKyrwdEeLc6",
+                GETUI_APP_KEY   : "msnxUWyj9W9ee9sfwl4VMA",
+                GETUI_APP_SECRET: "Coh6Xcx9gk9rbfOh7kDTyA"
+        ]
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86_64"
+        }
     }
     buildTypes {
         release {
@@ -69,4 +79,5 @@ dependencies {
     compile 'com.github.AudienL:SuperLibrary:1.0.7'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.getui:sdk:2.11.1.0'
 }

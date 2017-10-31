@@ -56,7 +56,7 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
         holder.mTvNoteType.setVisibility(showNoteType ? View.VISIBLE : View.GONE);
         holder.mTvNoteType.setText(note.type + "计划");
 
-        if (note.validStatus == 0) {
+        if (note.finish == 1) {
             // 已完成
             holder.mTvContent.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             holder.mTvContent.setSelected(true);
@@ -78,7 +78,7 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
 
         // 点击选择
         holder.mBtnSelect.setOnClickListener(v -> {
-            Api.updateNoteStatus(note.id, holder.mBtnSelect.isSelected() ? 0 : 1).subscribe(result -> {
+            Api.setFinished(note.id, holder.mBtnSelect.isSelected() ? 0 : 1).subscribe(result -> {
                 EventBus.getDefault().post(new RequestRefreshNoteListEvent(note.type));
             }, throwable -> {
                 ToastUtils.showToast(mContext, throwable.getMessage());

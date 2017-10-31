@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.base.BaseActivity;
+import com.diaozhatian.zhazhanote.manager.GTManager;
 
 public class StartActivity extends BaseActivity {
 
@@ -16,6 +17,8 @@ public class StartActivity extends BaseActivity {
 
     @Override
     public void init() {
+        GTManager.init(getApplicationContext());
+
         initPermissions();
     }
 

@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/lineTop"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#80FFFFFF"/>
+    <!--<View-->
+        <!--android:id="@+id/lineTop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="#80FFFFFF"/>-->
 
+        <!--android:layout_below="@+id/lineTop"-->
     <TextView
         android:id="@+id/tvContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lineTop"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_toLeftOf="@+id/btn_select"
@@ -37,7 +37,7 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#80b9a691"
+            android:textColor="#b9a691"
             android:textSize="12sp"
             tools:text="2017-10-20"/>
         <!-- 日计划、月计划 -->
@@ -70,9 +70,9 @@
         android:layout_marginRight="10dp"
         android:src="@drawable/check_box"/>
 
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:background="#80FFFFFF"/>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentBottom="true"
+        android:background="#80FFFFFF"/>
 </RelativeLayout>
