@@ -13,6 +13,8 @@ import com.audienl.superlibrary.base.SuperRecyclerViewAdapter;
 import com.audienl.superlibrary.utils.DateUtils;
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
+import com.diaozhatian.zhazhanote.activity.EditNoteActivity;
+import com.diaozhatian.zhazhanote.base.BaseActivity;
 import com.diaozhatian.zhazhanote.bean.Note;
 import com.diaozhatian.zhazhanote.bean.event.RequestRefreshNoteListEvent;
 import com.diaozhatian.zhazhanote.http.Api;
@@ -30,13 +32,24 @@ import butterknife.ButterKnife;
 public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
     private boolean showNoteType = false;
 
+    private BaseActivity mBaseActivity;
+
     public NoteListAdapter(Context context) {
-        super(context);
+        this(context, false);
     }
 
+    /**
+     * @param showNoteType 是否在每个计划上显示计划类型
+     */
     public NoteListAdapter(Context context, boolean showNoteType) {
         super(context);
         this.showNoteType = showNoteType;
+
+        if (context instanceof BaseActivity) {
+            mBaseActivity = (BaseActivity) context;
+        } else {
+            throw new RuntimeException("NoteListAdapter的context必须传入BaseActivity");
+        }
     }
 
     @Override
@@ -84,6 +97,10 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
                 ToastUtils.showToast(mContext, throwable.getMessage());
             });
         });
+
+        holder.mTopView.setOnClickListener(v -> {
+            EditNoteActivity.start(mBaseActivity, false, note);
+        });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -92,6 +109,8 @@ public class NoteListAdapter extends SuperRecyclerViewAdapter<Note> {
         @BindView(R.id.tv_note_type) TextView mTvNoteType;
         @BindView(R.id.btn_star) ImageView mBtnStar;
         @BindView(R.id.btn_select) ImageView mBtnSelect;
+
+        @BindView(R.id.top_view) ViewGroup mTopView;
 
         ViewHolder(View view) {
             super(view);

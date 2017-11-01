@@ -56,8 +56,8 @@ public class MainTabListView extends FrameLayout {
         mTextViews.add(mTv5);
 
         mTv1.setText("日计划");
-        mTv2.setText("月计划");
-        mTv3.setText("周计划");
+        mTv2.setText("周计划");
+        mTv3.setText("月计划");
         mTv4.setText("季计划");
         mTv5.setText("年计划");
 

@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
-import com.diaozhatian.zhazhanote.activity.EditNoteActivity;
 import com.diaozhatian.zhazhanote.adapter.NoteListAdapter;
 import com.diaozhatian.zhazhanote.annotation.NoteType;
 import com.diaozhatian.zhazhanote.base.BaseFragment;
@@ -14,7 +13,6 @@ import com.diaozhatian.zhazhanote.bean.event.OnAddNoteSuccessEvent;
 import com.diaozhatian.zhazhanote.bean.event.RequestRefreshNoteListEvent;
 import com.diaozhatian.zhazhanote.http.Api;
 import com.diaozhatian.zhazhanote.manager.UserManager;
-import com.diaozhatian.zhazhanote.widget.BottomVerticalDialog;
 import com.diaozhatian.zhazhanote.widget.EmptyView;
 import com.diaozhatian.zhazhanote.widget.XRecyclerView2;
 
@@ -67,33 +65,33 @@ public class MainFragment2 extends BaseFragment {
         mRecyclerView.setOnRefreshListener(this::request);
         mRecyclerView.setOnLoadMoreListener(this::request);
 
-        mNoteListAdapter.setOnItemClickListener((view, i, note) -> {
-//            updateNote(note);
-            EditNoteActivity.start(mBaseActivity, false, note);
-        });
+//        mNoteListAdapter.setOnItemClickListener((view, i, note) -> {
+////            updateNote(note);
+//            EditNoteActivity.start(mBaseActivity, false, note);
+//        });
 
-        mNoteListAdapter.setOnItemLongClickListener((view, i, note) -> {
-            note.selected = true;
-            mNoteListAdapter.notifyDataSetChanged();
-
-            BottomVerticalDialog dialog = new BottomVerticalDialog();
-            dialog.setButtonTexts(new String[]{"删除"});
-            dialog.setCallback((index, text) -> {
-                switch (index) {
-                    case 0:
-                        // 删除
-                        deleteNote(note.id);
-                        break;
-                }
-                dialog.dismiss();
-            });
-            dialog.setOnDismissListener(() -> {
-                note.selected = false;
-                mNoteListAdapter.notifyDataSetChanged();
-            });
-            dialog.show(mBaseActivity.getSupportFragmentManager(), "");
-            return false;
-        });
+//        mNoteListAdapter.setOnItemLongClickListener((view, i, note) -> {
+//            note.selected = true;
+//            mNoteListAdapter.notifyDataSetChanged();
+//
+//            BottomVerticalDialog dialog = new BottomVerticalDialog();
+//            dialog.setButtonTexts(new String[]{"删除"});
+//            dialog.setCallback((index, text) -> {
+//                switch (index) {
+//                    case 0:
+//                        // 删除
+//                        deleteNote(note.id);
+//                        break;
+//                }
+//                dialog.dismiss();
+//            });
+//            dialog.setOnDismissListener(() -> {
+//                note.selected = false;
+//                mNoteListAdapter.notifyDataSetChanged();
+//            });
+//            dialog.show(mBaseActivity.getSupportFragmentManager(), "");
+//            return false;
+//        });
     }
 
     @Override

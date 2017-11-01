@@ -61,10 +61,6 @@ dependencies {
     })
     compile "com.android.support:appcompat-v7:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
-    //    compile('com.jcodecraeer:xrecyclerview:1.3.2', {
-//        exclude group: 'com.android.support', module: 'design'
-//    })
-    // RxAndroid
     compile 'com.jcodecraeer:xrecyclerview:1.3.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.pgyersdk:sdk:2.7.6'
@@ -80,4 +76,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.getui:sdk:2.11.1.0'
+    compile project(':swipe_layout')
 }

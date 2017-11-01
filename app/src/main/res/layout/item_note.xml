@@ -1,78 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!--<View-->
+    <!-- Bottom View Start-->
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#E74C3C"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_delete"/>
+    </LinearLayout>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+    <RelativeLayout
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<View-->
         <!--android:id="@+id/lineTop"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="2dp"-->
         <!--android:background="#80FFFFFF"/>-->
 
         <!--android:layout_below="@+id/lineTop"-->
-    <TextView
-        android:id="@+id/tvContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_toLeftOf="@+id/btn_select"
-        android:textColor="@color/item_note_content_text_color"
-        android:textSize="18sp"
-        tools:text="这是一个测试"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvContent"
-        android:layout_below="@+id/tvContent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <!-- 时间 -->
         <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#b9a691"
-            android:textSize="12sp"
-            tools:text="2017-10-20"/>
-        <!-- 日计划、月计划 -->
-        <TextView
-            android:id="@+id/tv_note_type"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvContent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:textColor="#80b9a691"
-            android:textSize="12sp"
-            tools:text="日计划"/>
-        <!-- 星星 -->
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/btn_select"
+            android:textColor="@color/item_note_content_text_color"
+            android:textSize="18sp"
+            tools:text="这是一个测试"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvContent"
+            android:layout_below="@+id/tvContent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <!-- 时间 -->
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#b9a691"
+                android:textSize="12sp"
+                tools:text="2017-10-20"/>
+            <!-- 日计划、月计划 -->
+            <TextView
+                android:id="@+id/tv_note_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="#80b9a691"
+                android:textSize="12sp"
+                tools:text="日计划"/>
+            <!-- 星星 -->
+            <ImageView
+                android:id="@+id/btn_star"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/btn_star"/>
+        </LinearLayout>
+
+        <!-- 选中 -->
         <ImageView
-            android:id="@+id/btn_star"
+            android:id="@+id/btn_select"
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/btn_star"/>
-    </LinearLayout>
+            android:layout_marginRight="10dp"
+            android:src="@drawable/check_box"/>
 
-    <!-- 选中 -->
-    <ImageView
-        android:id="@+id/btn_select"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/check_box"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="#80FFFFFF"/>
+    </RelativeLayout>
+    <!-- Surface View End -->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignParentBottom="true"
-        android:background="#80FFFFFF"/>
-</RelativeLayout>
+</com.daimajia.swipe.SwipeLayout>
