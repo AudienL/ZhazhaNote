@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion compile_sdk_version
@@ -32,9 +32,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
-                    def file = output.outputFile
-                    def filename = file.name.replace("app", "zhazhanote").replace(".apk", "-" + defaultConfig.versionName + ".apk")
-                    output.outputFile = new File(file.parent, filename)
+                    def file = output.getOutputFileName()
+                    def filename = file.replace("app", "zhazhanote").replace(".apk", "-" + defaultConfig.versionName + ".apk")
+                    output.setOutputFileName(filename)
                 }
             }
         }
@@ -52,6 +52,7 @@ android {
         exclude 'META-INF/MANIFEST.MF'
         exclude 'META-INF/rxjava.properties'
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {
@@ -71,9 +72,9 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.github.AudienL:SuperLibrary:1.0.7'
     testCompile 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.getui:sdk:2.11.1.0'
     compile project(':swipe_layout')
