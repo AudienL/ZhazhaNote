@@ -27,7 +27,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 
-public class MainActivity2 extends BaseActivity {
+public class MainActivity extends BaseActivity {
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.etAddNote) EditText mEtAddNote;
     @BindView(R.id.viewPager) ViewPager mViewPager;
@@ -36,7 +36,7 @@ public class MainActivity2 extends BaseActivity {
     private SuperFragmentPagerAdapter mFragmentPagerAdapter;
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, MainActivity2.class);
+        Intent starter = new Intent(context, MainActivity.class);
         starter.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         context.startActivity(starter);
     }
@@ -61,6 +61,9 @@ public class MainActivity2 extends BaseActivity {
         mFragmentPagerAdapter.setFragments(MainFragment2.newInstance(NoteType.DAY), MainFragment2.newInstance(NoteType.WEEK), MainFragment2.newInstance(NoteType.MONTH), MainFragment2.newInstance(NoteType.SEASON), MainFragment2.newInstance(NoteType.YEAR));
         mViewPager.setAdapter(mFragmentPagerAdapter);
         mViewPager.setOffscreenPageLimit(5);
+
+        // TODO: 2017/11/5
+        Api.getFolderList(1, 100).subscribe(notes -> {}, throwable -> {});
     }
 
     @Override

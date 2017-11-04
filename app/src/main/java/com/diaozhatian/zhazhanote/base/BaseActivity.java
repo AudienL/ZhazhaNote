@@ -6,7 +6,7 @@ import android.support.annotation.LayoutRes;
 
 import com.audienl.superlibrary.base.SuperActivity;
 import com.diaozhatian.zhazhanote.activity.LoginActivity;
-import com.diaozhatian.zhazhanote.activity.MainActivity2;
+import com.diaozhatian.zhazhanote.activity.MainActivity;
 import com.diaozhatian.zhazhanote.bean.event.RequestLoginEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,7 +50,7 @@ public abstract class BaseActivity extends SuperActivity {
 
     @Subscribe
     public void onRequestLogin(RequestLoginEvent event) {
-        if (this instanceof MainActivity2) {
+        if (this instanceof MainActivity) {
             LoginActivity.start(mBaseActivity);
         }
         finish();

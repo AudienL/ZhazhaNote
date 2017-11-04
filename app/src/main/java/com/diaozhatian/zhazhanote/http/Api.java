@@ -30,12 +30,31 @@ public class Api {
     private static final String TAG = "Api";
 
     /**
-     * 便签列表
-     * @param type   不传则传null，查所有
-     * @param top    1为置顶，0为非置顶，-1为所有
-     * @param finish 1为已完成，0为未完成，-1为所有
+     * 文件夹列表
      */
-    public static Observable<List<Note>> getNoteList(String tag, String type, boolean display, int top, int finish, int page, int pageSize) {
+    public static Observable<List<Note>> getFolderList(int page, int pageSize) {
+        return Observable.create((ObservableOnSubscribe<Note>) e -> {
+            final RequestParams params = new RequestParams(Constants.URL_FOLDER_GET_FOLDER_LIST);
+            JSONObject obj = new JSONObject();
+
+            User user = UserManager.getLoginUser();
+            if (user != null) obj.put("userId", String.valueOf(user.userId));
+
+            obj.put("page", String.valueOf(page));
+            obj.put("pageSize", String.valueOf(pageSize));
+            params.setBodyContent(obj.toString());
+            new HttpHelper<>(Note.class, e, "文件夹列表").post(params);
+        }).map(note -> note.dataList);
+    }
+
+    /**
+     * 便签列表
+     * @param type     不传则传null，查所有
+     * @param folderId 文件夹ID，-1为所有
+     * @param top      1为置顶，0为非置顶，-1为所有
+     * @param finish   1为已完成，0为未完成，-1为所有
+     */
+    public static Observable<List<Note>> getNoteList(String tag, String type, int folderId, boolean display, int top, int finish, int page, int pageSize) {
         return Observable.create((ObservableOnSubscribe<Note>) e -> {
             final RequestParams params = new RequestParams(Constants.URL_NOTE_GET_NOTE_LIST);
             JSONObject obj = new JSONObject();
@@ -43,6 +62,7 @@ public class Api {
             User user = UserManager.getLoginUser();
             if (user != null) obj.put("userId", String.valueOf(user.userId));
 
+            if (folderId != -1) obj.put("folderId", folderId);
             if (top != -1) obj.put("top", top);
             if (finish != -1) obj.put("finish", finish);
             if (type != null) obj.put("type", type);
@@ -58,30 +78,31 @@ public class Api {
 
     /**
      * 便签列表
+     * @param folderId 文件夹ID，-1为所有
      */
-    public static Observable<List<Note>> getMainNoteList(@NoteType String type, int page, int pageSize) {
-        return getNoteList("便签列表", type, true, -1, -1, page, pageSize);
+    public static Observable<List<Note>> getMainNoteList(@NoteType String type, int folderId, int page, int pageSize) {
+        return getNoteList("便签列表", type, folderId, true, -1, -1, page, pageSize);
     }
 
     /**
      * 收藏夹列表
      */
     public static Observable<List<Note>> getFavorNoteList(int page, int pageSize) {
-        return getNoteList("收藏夹列表", null, true, 1, -1, page, pageSize);
+        return getNoteList("收藏夹列表", null, -1, true, 1, -1, page, pageSize);
     }
 
     /**
      * 已完成列表
      */
     public static Observable<List<Note>> getFinishedNoteList(int page, int pageSize) {
-        return getNoteList("已完成列表", null, true, -1, 1, page, pageSize);
+        return getNoteList("已完成列表", null, -1, true, -1, 1, page, pageSize);
     }
 
     /**
      * 回收站列表
      */
     public static Observable<List<Note>> getDeletedNoteList(int page, int pageSize) {
-        return getNoteList("回收站列表", null, false, -1, -1, page, pageSize);
+        return getNoteList("回收站列表", null, -1, false, -1, -1, page, pageSize);
     }
 
     /**

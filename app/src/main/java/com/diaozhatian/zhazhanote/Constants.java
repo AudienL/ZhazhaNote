@@ -28,6 +28,7 @@ public class Constants {
     public final static String URL_UPDATE_LOGIN_INFO = HOST + "auth/updateLoginInfo.do";// 记录版本信息
     public final static String URL_USER_GET_MY_INFO_BY_ID = HOST + "user/getMyInfoById/%d.do";// 个人资料，参数：userId
 
+    public final static String URL_FOLDER_GET_FOLDER_LIST = HOST + "folder/getFolderList.do";// 文件夹列表
     public final static String URL_NOTE_GET_NOTE_LIST = HOST + "note/getNoteList.do";// 便签列表
     public final static String URL_NOTE_ADD = HOST + "note/add.do";// 新增便签
     public final static String URL_NOTE_UPDATE = HOST + "note/update.do";// 修改便签

@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
         String password = mEtPassword.getText().toString();
         UserManager.login(mobile, password).subscribe(user -> {
             ToastUtils.showToast(mBaseActivity, "登录成功");
-            MainActivity2.start(mBaseActivity);
+            MainActivity.start(mBaseActivity);
             finish();
         }, throwable -> {
             ToastUtils.showToast(mBaseActivity, throwable.getMessage());
