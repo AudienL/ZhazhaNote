@@ -1,53 +1,45 @@
 {
   "dataList": [
     {
-      "color": "#FFFFFF",
-      "display": 1,
-      "updateTime": 1508835598000,
-      "type": "日",
-      "userId": 3151,
-      "content": "再说吧说吧只是",
-      "userCode": "80303151",
       "validStatus": 1,
-      "top": 1,
-      "createTime": 1508495188000,
-      "phone": "17098905192",
-      "phoneUniqueCode": "d6bc9b9438db91d74e2cafd1322869b6",
-      "finish": 0,
-      "id": 20
+      "createTime": 1509678576000,
+      "name": "日计划",
+      "systemFolder": 1,
+      "updateTime": 1509678576000,
+      "id": 1
     },
     {
-      "color": "#FFFFFF",
-      "display": 1,
-      "updateTime": 1508742436000,
-      "type": "日",
-      "userId": 3151,
-      "content": "这里好多钱这个人生日明天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天天",
-      "userCode": "80303151",
       "validStatus": 1,
-      "top": 0,
-      "createTime": 1508500468000,
-      "phone": "17098905192",
-      "phoneUniqueCode": "d6bc9b9438db91d74e2cafd1322869b6",
-      "finish": 1,
-      "id": 22
+      "createTime": 1509678581000,
+      "name": "周计划",
+      "systemFolder": 1,
+      "updateTime": 1509678581000,
+      "id": 2
     },
     {
-      "color": "#FFFFFF",
-      "display": 1,
-      "updateTime": 1508491274000,
-      "type": "日",
-      "userId": 3151,
-      "content": "什么鬼",
-      "userCode": "80303151",
       "validStatus": 1,
-      "top": 0,
-      "createTime": 1508491274000,
-      "phone": "17098905192",
-      "phoneUniqueCode": "d6bc9b9438db91d74e2cafd1322869b6",
-      "finish": 0,
-      "id": 17
+      "createTime": 1509678586000,
+      "name": "月计划",
+      "systemFolder": 1,
+      "updateTime": 1509678586000,
+      "id": 3
+    },
+    {
+      "validStatus": 1,
+      "createTime": 1509678592000,
+      "name": "季计划",
+      "systemFolder": 1,
+      "updateTime": 1509678592000,
+      "id": 4
+    },
+    {
+      "validStatus": 1,
+      "createTime": 1509678598000,
+      "name": "年计划",
+      "systemFolder": 1,
+      "updateTime": 1509678598000,
+      "id": 5
     }
   ],
   "status": "success"
-}
+} |

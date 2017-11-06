@@ -6,14 +6,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_page"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.diaozhatian.zhazhanote.widget.Toolbar
-        android:id="@+id/toolbar"
+    <!-- Toolbar -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:toolbar_right_icon="@mipmap/toolbar_add"
-        app:toolbar_title="@string/app_name"/>
+        android:layout_height="48dp"
+        android:background="@color/toolbar"
+        android:orientation="horizontal">
+        <!-- 左图标 -->
+        <ImageView
+            android:id="@+id/btn_left"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/toolbar_btn_bg"
+            android:padding="15dp"
+            android:src="@mipmap/toolbar_setting"/>
+        <!-- 标题 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                tools:text="标题"/>
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:src="@mipmap/icon_pull_down"/>
+        </LinearLayout>
+        <!-- 右图标 -->
+        <ImageView
+            android:id="@+id/btn_right"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:src="@mipmap/toolbar_add"/>
+    </LinearLayout>
 
     <!-- 新增便签 -->
     <EditText

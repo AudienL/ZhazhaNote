@@ -7,6 +7,7 @@ import com.diaozhatian.zhazhanote.annotation.CodeType;
 import com.diaozhatian.zhazhanote.annotation.Gender;
 import com.diaozhatian.zhazhanote.annotation.NoteType;
 import com.diaozhatian.zhazhanote.base.App;
+import com.diaozhatian.zhazhanote.bean.Folder;
 import com.diaozhatian.zhazhanote.bean.Note;
 import com.diaozhatian.zhazhanote.bean.User;
 import com.diaozhatian.zhazhanote.manager.UserManager;
@@ -32,8 +33,8 @@ public class Api {
     /**
      * 文件夹列表
      */
-    public static Observable<List<Note>> getFolderList(int page, int pageSize) {
-        return Observable.create((ObservableOnSubscribe<Note>) e -> {
+    public static Observable<List<Folder>> getFolderList(int page, int pageSize) {
+        return Observable.create((ObservableOnSubscribe<Folder>) e -> {
             final RequestParams params = new RequestParams(Constants.URL_FOLDER_GET_FOLDER_LIST);
             JSONObject obj = new JSONObject();
 
@@ -43,7 +44,7 @@ public class Api {
             obj.put("page", String.valueOf(page));
             obj.put("pageSize", String.valueOf(pageSize));
             params.setBodyContent(obj.toString());
-            new HttpHelper<>(Note.class, e, "文件夹列表").post(params);
+            new HttpHelper<>(Folder.class, e, "文件夹列表").post(params);
         }).map(note -> note.dataList);
     }
 
