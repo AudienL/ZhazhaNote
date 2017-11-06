@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2"
+    android:orientation="vertical">
+
+    <com.diaozhatian.zhazhanote.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:toolbar_right_text="保存"/>
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_200px"
+        android:background="#FFFFFF"
+        android:gravity="start"
+        android:padding="@dimen/new_30px"
+        android:textColor="#333333"
+        android:textColorHint="#AAAAAA"
+        android:textSize="16sp"
+        tools:hint="请输入用户名"/>
+</LinearLayout>

@@ -30,6 +30,18 @@ import io.reactivex.ObservableOnSubscribe;
 public class Api {
     private static final String TAG = "Api";
 
+    /** 新建文件夹 */
+    public static Observable<HttpResult> createFolder(int userId, String folderName) {
+        return Observable.create((ObservableOnSubscribe<HttpResult>) e -> {
+            final RequestParams params = new RequestParams(Constants.URL_FOLDER_ADD);
+            JSONObject obj = new JSONObject();
+            obj.put("userId", userId);
+            obj.put("name", folderName);
+            params.setBodyContent(obj.toString());
+            new HttpHelper<>(HttpResult.class, e, "新建文件夹").post(params);
+        });
+    }
+
     /**
      * 文件夹列表
      */

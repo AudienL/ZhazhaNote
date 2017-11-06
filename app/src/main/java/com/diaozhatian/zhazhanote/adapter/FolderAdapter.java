@@ -43,6 +43,10 @@ public class FolderAdapter extends SuperRecyclerViewAdapter<Folder> {
         holder.mTvContent.setText(folder.name);
         holder.mBtnSelected.setVisibility(folder.isSelected ? View.VISIBLE : View.GONE);
         if (folder.isSelected) mCurrentFolder = folder;
+
+        holder.mTopView.setOnClickListener(v -> {
+            dsf
+        });
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

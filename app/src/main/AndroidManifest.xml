@@ -70,10 +70,8 @@
         </provider>
         <!-- 蒲公英 -->
 
-        <activity android:name=".activity.ApiTestActivity">
-        </activity>
-        <activity android:name=".activity.SettingActivity">
-        </activity>
+        <activity android:name=".activity.TextEditActivity"/>
+        <activity android:name=".activity.SettingActivity"/>
         <activity android:name=".activity.RegisterActivity">
         </activity>
         <activity android:name=".activity.ResetPassword">

@@ -35,16 +35,14 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
+    private static final int REQUEST_CODE_FOLDER_NAME = 1;
 
     @BindView(R.id.etAddNote) EditText mEtAddNote;
     @BindView(R.id.fragment_container) FrameLayout mFragmentContainer;
-    //    @BindView(R.id.viewPager) ViewPager mViewPager;
-    //    @BindView(R.id.mainTabListView) MainTabListView mMainTabListView;
     @BindView(R.id.btn_left) ImageView mBtnLeft;
     @BindView(R.id.tv_title) TextView mTvTitle;
     @BindView(R.id.btn_right) ImageView mBtnRight;
 
-    //    private SuperFragmentPagerAdapter mFragmentPagerAdapter;
     private FolderAdapter mFolderAdapter;
     private PopupWindow mFolderPopupWindow;
 
@@ -68,31 +66,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void init() {
-//        mFragmentPagerAdapter = new SuperFragmentPagerAdapter(getSupportFragmentManager());
-//        mViewPager.setAdapter(mFragmentPagerAdapter);
-
         mFolderAdapter = new FolderAdapter(mBaseActivity);
 
-        showWaitDialog();
-        Api.getFolderList(1, 100).subscribe(folders -> {
-            if (folders.size() <= 0) {
-                ToastUtils.showToast(mBaseActivity, "没有文件夹");
-                return;
-            }
-
-            Folder folderCurrent = folders.get(0);
-            folderCurrent.isSelected = true;
-            mTvTitle.setText(folderCurrent.name);
-
-            setCurrentFragment(folderCurrent);
-
-            mFolderAdapter.setData(folders);
-
-            hideWaitDialog();
-        }, throwable -> {
-            hideWaitDialog();
-            ToastUtils.showToast(mBaseActivity, "加载文件夹失败");
-        });
+        loadFolderList();
     }
 
     @Override
@@ -167,11 +143,59 @@ public class MainActivity extends BaseActivity {
 
             btnCreate.setOnClickListener(v -> {
                 // 新建文件夹
+                User user = UserManager.checkUserLogin();
+                if (user == null) return;
+                TextEditActivity.startActivityForResult(mBaseActivity, REQUEST_CODE_FOLDER_NAME, "文件夹名", "保存", "请输入文件夹名", "");
             });
         }
 
         int xoff = -UIUtils.getScreenWidth(mBaseActivity) / 4 + mTvTitle.getWidth() / 2;
         mFolderPopupWindow.showAsDropDown(mTvTitle, xoff, 20);
+    }
+
+    private void loadFolderList() {
+        showWaitDialog();
+        Api.getFolderList(1, 100).subscribe(folders -> {
+            if (folders.size() <= 0) {
+                ToastUtils.showToast(mBaseActivity, "没有文件夹");
+                return;
+            }
+
+            Folder folderCurrent = folders.get(0);
+            folderCurrent.isSelected = true;
+            mTvTitle.setText(folderCurrent.name);
+
+            setCurrentFragment(folderCurrent);
+
+            mFolderAdapter.setData(folders);
+
+            hideWaitDialog();
+        }, throwable -> {
+            hideWaitDialog();
+            ToastUtils.showToast(mBaseActivity, "加载文件夹失败");
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_FOLDER_NAME:
+                // 新建文件夹
+                if (resultCode == RESULT_OK) {
+                    String folderName = TextEditActivity.getContent(data);
+                    if (TextUtils.isEmpty(folderName)) return;
+                    User user = UserManager.checkUserLogin();
+                    if (user == null) return;
+                    Api.createFolder(user.userId, folderName).subscribe(httpResult -> {
+                        loadFolderList();
+                    }, throwable -> {
+                        ToastUtils.showToast(mBaseActivity, throwable.getMessage());
+                    });
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @OnClick({R.id.btn_left, R.id.tv_title, R.id.btn_right})
