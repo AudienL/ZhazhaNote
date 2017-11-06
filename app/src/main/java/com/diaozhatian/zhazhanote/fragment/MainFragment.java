@@ -3,16 +3,14 @@ package com.diaozhatian.zhazhanote.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.audienl.superlibrary.utils.IntentHelper;
 import com.audienl.superlibrary.utils.ToastUtils;
 import com.diaozhatian.zhazhanote.R;
 import com.diaozhatian.zhazhanote.adapter.NoteListAdapter;
-import com.diaozhatian.zhazhanote.annotation.NoteType;
 import com.diaozhatian.zhazhanote.base.BaseFragment;
-import com.diaozhatian.zhazhanote.bean.User;
-import com.diaozhatian.zhazhanote.bean.event.OnAddNoteSuccessEvent;
+import com.diaozhatian.zhazhanote.bean.Folder;
 import com.diaozhatian.zhazhanote.bean.event.RequestRefreshNoteListEvent;
 import com.diaozhatian.zhazhanote.http.Api;
-import com.diaozhatian.zhazhanote.manager.UserManager;
 import com.diaozhatian.zhazhanote.widget.EmptyView;
 import com.diaozhatian.zhazhanote.widget.XRecyclerView2;
 
@@ -20,31 +18,29 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
-public class MainFragment2 extends BaseFragment {
+public class MainFragment extends BaseFragment {
+    private static final String TAG = "MainFragment";
+
     @BindView(R.id.recyclerView) XRecyclerView2 mRecyclerView;
     @BindView(R.id.emptyView) EmptyView mEmptyView;
 
     private NoteListAdapter mNoteListAdapter;
-    private String mNoteType;
+    private Folder mFolder;
 
-    public MainFragment2() {
+    public MainFragment() {
         // Required empty public constructor
     }
 
-    public static MainFragment2 newInstance(@NoteType String noteType) {
-        MainFragment2 fragment = new MainFragment2();
-        Bundle args = new Bundle();
-        args.putString("note_type", noteType);
-        fragment.setArguments(args);
+    public static MainFragment newInstance(Folder folder) {
+        MainFragment fragment = new MainFragment();
+        IntentHelper.put(TAG, "folder", folder);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mNoteType = getArguments().getString("note_type");
-        }
+        mFolder = (Folder) IntentHelper.get(TAG, "folder");
     }
 
     @Override
@@ -109,12 +105,7 @@ public class MainFragment2 extends BaseFragment {
     }
 
     private void request(int page, int pageSize) {
-        String userId = "";
-        User user = UserManager.getLoginUser();
-        if (user != null) userId = String.valueOf(user.userId);
-
-        // TODO: 2017/11/4
-        Api.getMainNoteList(mNoteType, 1, page, pageSize).subscribe(notes -> {
+        Api.getMainNoteList(mFolder.id, page, pageSize).subscribe(notes -> {
             // 排序
 //            List<Note> topList = new ArrayList<>();
 //            List<Note> normalList = new ArrayList<>();
@@ -140,16 +131,7 @@ public class MainFragment2 extends BaseFragment {
     }
 
     @Subscribe
-    public void onAddNoteSuccess(OnAddNoteSuccessEvent event) {
-        if (mNoteType.equals(event.noteType)) {
-            mRecyclerView.refresh();
-        }
-    }
-
-    @Subscribe
     public void onRequestRefreshNoteList(RequestRefreshNoteListEvent event) {
-        if (mNoteType.equals(event.noteType)) {
-            mRecyclerView.refresh();
-        }
+        mRecyclerView.refresh();
     }
 }

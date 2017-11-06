@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.LayoutRes;
 
 import com.audienl.superlibrary.base.SuperActivity;
+import com.audienl.superlibrary.widget.WaitDialog;
 import com.diaozhatian.zhazhanote.activity.LoginActivity;
 import com.diaozhatian.zhazhanote.activity.MainActivity;
 import com.diaozhatian.zhazhanote.bean.event.RequestLoginEvent;
@@ -24,6 +25,7 @@ public abstract class BaseActivity extends SuperActivity {
     protected BaseActivity mBaseActivity;
     protected Handler mHandler = new Handler();
     Unbinder unbinder;
+    protected WaitDialog mWaitDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public abstract class BaseActivity extends SuperActivity {
         if (unbinder != null) {
             unbinder.unbind();
         }
+        if (mWaitDialog != null) mWaitDialog.dismiss();
     }
 
     @Subscribe
@@ -64,4 +67,13 @@ public abstract class BaseActivity extends SuperActivity {
     public abstract void initListeners();
 
     public void loadData() {}
+
+    protected void showWaitDialog() {
+        if (mWaitDialog == null) mWaitDialog = new WaitDialog(mBaseActivity, true);
+        mWaitDialog.show(10);
+    }
+
+    protected void hideWaitDialog() {
+        if (mWaitDialog != null) mWaitDialog.hide();
+    }
 }

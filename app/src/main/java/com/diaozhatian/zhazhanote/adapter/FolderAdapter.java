@@ -22,8 +22,14 @@ import butterknife.ButterKnife;
  * Created by audienl@qq.com on 2017/11/6.
  */
 public class FolderAdapter extends SuperRecyclerViewAdapter<Folder> {
+    private Folder mCurrentFolder;
+
     public FolderAdapter(Context context) {
         super(context);
+    }
+
+    public Folder getCurrentFolder() {
+        return mCurrentFolder;
     }
 
     @Override
@@ -36,6 +42,7 @@ public class FolderAdapter extends SuperRecyclerViewAdapter<Folder> {
         ViewHolder holder = (ViewHolder) viewHolder;
         holder.mTvContent.setText(folder.name);
         holder.mBtnSelected.setVisibility(folder.isSelected ? View.VISIBLE : View.GONE);
+        if (folder.isSelected) mCurrentFolder = folder;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -64,15 +64,15 @@
         android:visibility="gone"
         tools:text="这是一个测试"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
     <!-- 底部TabList -->
-    <com.diaozhatian.zhazhanote.widget.MainTabListView
-        android:id="@+id/mainTabListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <!--<com.diaozhatian.zhazhanote.widget.MainTabListView-->
+    <!--android:id="@+id/mainTabListView"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"/>-->
 </LinearLayout>
