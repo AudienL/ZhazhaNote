@@ -10,11 +10,11 @@ public class Constants {
     static {
         if (BuildConfig.DEBUG) {
             // PC直接安装
-            HOST = "http://hellogood.top/hellogood_api/";
+            HOST = "https://hellogood.top/hellogood_api/";
 
         } else {
             // 打包-发布
-            HOST = "http://hellogood.top/hellogood_api/";
+            HOST = "https://hellogood.top/hellogood_api/";
         }
     }
 
